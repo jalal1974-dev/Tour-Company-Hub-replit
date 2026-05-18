@@ -13,9 +13,13 @@ export const inquiriesTable = pgTable("inquiries", {
   travelDate: text("travel_date"),
   notes: text("notes"),
   status: text("status").notNull().default("new"),
+  packageId: integer("package_id"),
+  packageSnapshot: text("package_snapshot"),
+  adminNotes: text("admin_notes"),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow().$onUpdate(() => new Date()),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
-export const insertInquirySchema = createInsertSchema(inquiriesTable).omit({ id: true, createdAt: true, status: true });
+export const insertInquirySchema = createInsertSchema(inquiriesTable).omit({ id: true, createdAt: true, updatedAt: true, status: true });
 export type InsertInquiry = z.infer<typeof insertInquirySchema>;
 export type Inquiry = typeof inquiriesTable.$inferSelect;

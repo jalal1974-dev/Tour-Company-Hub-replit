@@ -29,7 +29,28 @@ interface PackageCardProps {
   pkg: PackageResult;
   destinationNameAr?: string;
   destinationNameEn?: string;
+  destinationSlug?: string;
   index?: number;
+}
+
+async function saveInquiry(data: {
+  name: string;
+  phone: string;
+  adults: number;
+  children: number;
+  destination?: string;
+  packageId: number;
+  packageSnapshot: Record<string, unknown>;
+}) {
+  try {
+    await fetch("/api/inquiries", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+  } catch {
+    // silently fail — WhatsApp still opens
+  }
 }
 
 export function PackageCard({ pkg, destinationNameAr, destinationNameEn, index = 0 }: PackageCardProps) {
@@ -43,6 +64,22 @@ export function PackageCard({ pkg, destinationNameAr, destinationNameEn, index =
   const { t, isEn } = useLanguage();
 
   const hotelName = isEn ? pkg.hotelNameEn : pkg.hotelNameAr;
+  const destName = isEn ? destinationNameEn : destinationNameAr;
+
+  const packageSnapshot = {
+    hotelNameEn: pkg.hotelNameEn,
+    hotelNameAr: pkg.hotelNameAr,
+    stars: pkg.stars,
+    nights: pkg.nights,
+    mealPlan: pkg.mealPlan,
+    roomType: pkg.roomType,
+    finalPriceJod: pkg.finalPriceJod,
+    area: pkg.area,
+    dateFrom: pkg.dateFrom,
+    dateTo: pkg.dateTo,
+    destinationNameEn,
+    destinationNameAr,
+  };
 
   const handleWhatsApp = () => {
     if (!guestName.trim()) {
@@ -65,6 +102,15 @@ export function PackageCard({ pkg, destinationNameAr, destinationNameEn, index =
         onSuccess: (quote) => {
           const encoded = encodeURIComponent(quote.whatsappMessage);
           window.open(`https://wa.me/${quote.whatsappNumber}?text=${encoded}`, "_blank");
+          saveInquiry({
+            name: guestName.trim(),
+            phone: guestPhone.trim() || "—",
+            adults,
+            children,
+            destination: destinationNameEn ?? destinationNameAr,
+            packageId: pkg.id,
+            packageSnapshot,
+          });
           setOpen(false);
         },
         onError: () => {
@@ -75,7 +121,6 @@ export function PackageCard({ pkg, destinationNameAr, destinationNameEn, index =
   };
 
   const quickWhatsApp = () => {
-    const destName = isEn ? destinationNameEn : destinationNameAr;
     const msg = isEn
       ? `Hello, I'd like to inquire about a package:\n${destName ? `Destination: ${destName}` : ""}\nHotel: ${pkg.hotelNameEn}\nNights: ${pkg.nights}\nPrice: ${pkg.finalPriceJod} JOD`
       : `مرحباً، أود الاستفسار عن باقة:\n${destName ? `الوجهة: ${destName}` : ""}\nالفندق: ${pkg.hotelNameAr}\nعدد الليالي: ${pkg.nights}\nالسعر: ${pkg.finalPriceJod} د.أ`;
@@ -106,13 +151,11 @@ export function PackageCard({ pkg, destinationNameAr, destinationNameEn, index =
             </div>
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent" />
-          {/* Stars */}
           <div className="absolute top-3 right-3 flex items-center gap-0.5">
             {Array.from({ length: pkg.stars }).map((_, i) => (
               <Star key={i} className="w-3 h-3 fill-primary text-primary" />
             ))}
           </div>
-          {/* Price Badge */}
           <div className="absolute bottom-3 left-3">
             <div className="bg-primary text-primary-foreground px-3 py-1">
               <span className="text-lg font-bold">{pkg.finalPriceJod}</span>
@@ -126,9 +169,7 @@ export function PackageCard({ pkg, destinationNameAr, destinationNameEn, index =
           <div className="mb-3">
             <h3 className="font-serif text-foreground text-base font-medium leading-tight mb-0.5">{hotelName}</h3>
             <p className="text-foreground/40 text-xs">{pkg.hotelNameEn}</p>
-            {pkg.area && (
-              <p className="text-primary/70 text-xs mt-0.5">{pkg.area}</p>
-            )}
+            {pkg.area && <p className="text-primary/70 text-xs mt-0.5">{pkg.area}</p>}
           </div>
 
           <div className="flex flex-wrap gap-2 mb-4">
@@ -200,10 +241,7 @@ export function PackageCard({ pkg, destinationNameAr, destinationNameEn, index =
               <div className="flex-1">
                 <label className="text-xs text-foreground/60 block mb-1">{t.adultsLabel}</label>
                 <input
-                  type="number"
-                  min={1}
-                  max={10}
-                  value={adults}
+                  type="number" min={1} max={10} value={adults}
                   onChange={(e) => setAdults(Number(e.target.value))}
                   className="w-full bg-muted border border-white/10 text-foreground text-sm px-3 py-2 focus:outline-none focus:border-primary"
                   data-testid="input-adults"
@@ -212,10 +250,7 @@ export function PackageCard({ pkg, destinationNameAr, destinationNameEn, index =
               <div className="flex-1">
                 <label className="text-xs text-foreground/60 block mb-1">{t.childrenLabel}</label>
                 <input
-                  type="number"
-                  min={0}
-                  max={10}
-                  value={children}
+                  type="number" min={0} max={10} value={children}
                   onChange={(e) => setChildren(Number(e.target.value))}
                   className="w-full bg-muted border border-white/10 text-foreground text-sm px-3 py-2 focus:outline-none focus:border-primary"
                   data-testid="input-children"
