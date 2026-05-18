@@ -7,12 +7,14 @@ import NotFound from "@/pages/not-found";
 import HomePage from "@/pages/home";
 import DestinationsPage from "@/pages/destinations";
 import DestinationDetailPage from "@/pages/destination-detail";
+import ContactPage from "@/pages/contact";
 import AdminLoginPage from "@/pages/admin/login";
 import AdminDashboardPage from "@/pages/admin/dashboard";
 import AdminSettingsPage from "@/pages/admin/settings";
 import AdminDestinationsPage from "@/pages/admin/destinations";
 import AdminHotelsPage from "@/pages/admin/hotels";
 import AdminPackagesPage from "@/pages/admin/packages";
+import AdminInquiriesPage from "@/pages/admin/inquiries";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,12 +31,14 @@ function Router() {
       <Route path="/" component={HomePage} />
       <Route path="/destinations" component={DestinationsPage} />
       <Route path="/destinations/:slug" component={DestinationDetailPage} />
+      <Route path="/contact" component={ContactPage} />
       <Route path="/admin/login" component={AdminLoginPage} />
       <Route path="/admin" component={AdminDashboardPage} />
       <Route path="/admin/destinations" component={AdminDestinationsPage} />
       <Route path="/admin/hotels" component={AdminHotelsPage} />
       <Route path="/admin/packages" component={AdminPackagesPage} />
       <Route path="/admin/settings" component={AdminSettingsPage} />
+      <Route path="/admin/inquiries" component={AdminInquiriesPage} />
       <Route component={NotFound} />
     </Switch>
   );

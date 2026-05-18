@@ -258,7 +258,7 @@ export default function AdminSettingsPage() {
                     <span className="text-xs text-foreground/30 mr-2">Contact Information</span>
                   </h2>
                   {field("whatsappNumber", "رقم واتساب (بدون +)", "WhatsApp Number (without +)", "text", undefined)}
-                  <p className="text-foreground/30 text-xs mt-2">مثال: 962777066001</p>
+                  <p className="text-foreground/30 text-xs mt-2">مثال: 962777066005</p>
                 </motion.div>
               </div>
 

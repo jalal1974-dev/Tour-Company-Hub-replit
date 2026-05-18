@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, MessageCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const destLinksAr = ["إسطنبول", "أنطاليا", "طرابزون", "شرم الشيخ", "بالي", "ماليزيا"];
@@ -50,14 +50,21 @@ export function Footer() {
             <h3 className="font-serif text-primary text-sm mb-4">{t.footerContactTitle}</h3>
             <div className="flex flex-col gap-3">
               <a
-                href="https://wa.me/962777066001"
+                href="https://wa.me/962777066005"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-foreground/50 hover:text-primary text-sm transition-colors"
                 data-testid="link-footer-whatsapp"
               >
+                <MessageCircle className="w-4 h-4 text-primary" />
+                <span dir="ltr">+962 777 066 005</span>
+              </a>
+              <a
+                href="tel:+962777066800"
+                className="flex items-center gap-2 text-foreground/50 hover:text-primary text-sm transition-colors"
+              >
                 <Phone className="w-4 h-4 text-primary" />
-                <span dir="ltr">+962 77 706 6001</span>
+                <span dir="ltr">+962 777 066 800</span>
               </a>
               <div className="flex items-center gap-2 text-foreground/50 text-sm">
                 <Mail className="w-4 h-4 text-primary" />

@@ -80,7 +80,7 @@ export function PackageCard({ pkg, destinationNameAr, destinationNameEn, index =
       ? `Hello, I'd like to inquire about a package:\n${destName ? `Destination: ${destName}` : ""}\nHotel: ${pkg.hotelNameEn}\nNights: ${pkg.nights}\nPrice: ${pkg.finalPriceJod} JOD`
       : `مرحباً، أود الاستفسار عن باقة:\n${destName ? `الوجهة: ${destName}` : ""}\nالفندق: ${pkg.hotelNameAr}\nعدد الليالي: ${pkg.nights}\nالسعر: ${pkg.finalPriceJod} د.أ`;
     const encoded = encodeURIComponent(msg);
-    window.open(`https://wa.me/962777066001?text=${encoded}`, "_blank");
+    window.open(`https://wa.me/962777066005?text=${encoded}`, "_blank");
   };
 
   return (

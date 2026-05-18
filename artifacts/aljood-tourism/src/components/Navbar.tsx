@@ -7,11 +7,12 @@ import { useLanguage } from "@/contexts/LanguageContext";
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [location] = useLocation();
-  const { t, lang, toggleLang } = useLanguage();
+  const { t, lang, toggleLang, isEn } = useLanguage();
 
   const links = [
     { href: "/", label: t.navHome },
     { href: "/destinations", label: t.navDestinations },
+    { href: "/contact", label: isEn ? "Contact" : "تواصل معنا" },
   ];
 
   return (
@@ -38,7 +39,6 @@ export function Navbar() {
                 className={`text-sm transition-colors hover:text-primary font-serif ${
                   location === link.href ? "text-primary" : "text-foreground/70"
                 }`}
-                data-testid={`nav-link-${link.label.toLowerCase()}`}
               >
                 {link.label}
               </Link>
@@ -58,7 +58,7 @@ export function Navbar() {
             </button>
 
             <a
-              href="https://wa.me/962777066001"
+              href="https://wa.me/962777066005"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden md:flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground px-4 py-2 text-xs font-semibold tracking-wide transition-colors"
@@ -99,7 +99,7 @@ export function Navbar() {
                 </Link>
               ))}
               <a
-                href="https://wa.me/962777066001"
+                href="https://wa.me/962777066005"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 text-xs font-semibold text-center justify-center"

@@ -11,7 +11,7 @@ export const pricingSettingsTable = pgTable("pricing_settings", {
   rateUsdToJod: numeric("rate_usd_to_jod", { precision: 8, scale: 4 }).notNull().default("0.7085"),
   rateEurToJod: numeric("rate_eur_to_jod", { precision: 8, scale: 4 }).notNull().default("0.7750"),
   rateSarToJod: numeric("rate_sar_to_jod", { precision: 8, scale: 4 }).notNull().default("0.1889"),
-  whatsappNumber: text("whatsapp_number").notNull().default("962777066001"),
+  whatsappNumber: text("whatsapp_number").notNull().default("962777066005"),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow().$onUpdate(() => new Date()),
 });
 

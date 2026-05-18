@@ -57,7 +57,7 @@ function HeroSection() {
             <ArrowRight className="w-4 h-4" />
           </Link>
           <a
-            href="https://wa.me/962777066001"
+            href="https://wa.me/962777066005"
             target="_blank"
             rel="noopener noreferrer"
             className="border border-primary/40 hover:border-primary text-primary px-8 py-3 text-sm font-semibold tracking-wide transition-colors text-center"
