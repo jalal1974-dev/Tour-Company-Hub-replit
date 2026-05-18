@@ -2,14 +2,16 @@ import { Link, useLocation } from "wouter";
 import { useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [location] = useLocation();
+  const { t, lang, toggleLang } = useLanguage();
 
   const links = [
-    { href: "/", label: "الرئيسية", labelEn: "Home" },
-    { href: "/destinations", label: "الوجهات", labelEn: "Destinations" },
+    { href: "/", label: t.navHome },
+    { href: "/destinations", label: t.navDestinations },
   ];
 
   return (
@@ -33,19 +35,28 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm transition-colors hover:text-primary ${
+                className={`text-sm transition-colors hover:text-primary font-serif ${
                   location === link.href ? "text-primary" : "text-foreground/70"
                 }`}
-                data-testid={`nav-link-${link.labelEn.toLowerCase()}`}
+                data-testid={`nav-link-${link.label.toLowerCase()}`}
               >
-                <span className="font-serif ml-1">{link.label}</span>
-                <span className="text-foreground/40 text-xs"> / {link.labelEn}</span>
+                {link.label}
               </Link>
             ))}
           </nav>
 
-          {/* CTA + Mobile */}
-          <div className="flex items-center gap-3">
+          {/* CTA + Lang Toggle + Mobile */}
+          <div className="flex items-center gap-2">
+            {/* Language Toggle */}
+            <button
+              onClick={toggleLang}
+              className="flex items-center justify-center w-9 h-9 border border-white/20 hover:border-primary/60 text-foreground/70 hover:text-primary text-xs font-bold tracking-widest transition-colors"
+              data-testid="button-lang-toggle"
+              title={lang === "ar" ? "Switch to English" : "التبديل للعربية"}
+            >
+              {lang === "ar" ? "EN" : "ع"}
+            </button>
+
             <a
               href="https://wa.me/962777066001"
               target="_blank"
@@ -54,7 +65,7 @@ export function Navbar() {
               data-testid="button-whatsapp-nav"
             >
               <Phone className="w-3 h-3" />
-              <span>واتساب</span>
+              <span>{t.navWhatsapp}</span>
             </a>
             <button
               className="md:hidden text-foreground/70 hover:text-foreground"
@@ -82,9 +93,9 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="text-sm text-foreground/70 hover:text-primary transition-colors"
+                  className="text-sm text-foreground/70 hover:text-primary transition-colors font-serif"
                 >
-                  {link.label} / {link.labelEn}
+                  {link.label}
                 </Link>
               ))}
               <a
@@ -93,7 +104,7 @@ export function Navbar() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 text-xs font-semibold text-center justify-center"
               >
-                <Phone className="w-3 h-3" /> WhatsApp
+                <Phone className="w-3 h-3" /> {t.navWhatsapp}
               </a>
             </div>
           </motion.div>

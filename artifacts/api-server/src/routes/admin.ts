@@ -94,6 +94,34 @@ router.get("/admin/me", (req, res): void => {
   });
 });
 
+router.post("/admin/change-password", requireAdmin, async (req, res): Promise<void> => {
+  const { currentPassword, newPassword } = req.body as { currentPassword?: string; newPassword?: string };
+  if (!currentPassword || !newPassword) {
+    res.status(400).json({ error: "currentPassword and newPassword are required" });
+    return;
+  }
+  if (newPassword.length < 8) {
+    res.status(400).json({ error: "New password must be at least 8 characters" });
+    return;
+  }
+  const sessionReq = req as SessionRequest;
+  const adminId = sessionReq.session.adminId!;
+  const [admin] = await db.select().from(adminsTable).where(eq(adminsTable.id, adminId));
+  if (!admin) {
+    res.status(404).json({ error: "Admin not found" });
+    return;
+  }
+  if (admin.passwordHash !== hashPassword(currentPassword)) {
+    res.status(401).json({ error: "Current password is incorrect" });
+    return;
+  }
+  await db
+    .update(adminsTable)
+    .set({ passwordHash: hashPassword(newPassword) })
+    .where(eq(adminsTable.id, adminId));
+  res.json({ ok: true });
+});
+
 router.get("/admin/settings", requireAdmin, async (_req, res): Promise<void> => {
   const settings = await db.select().from(pricingSettingsTable).limit(1);
   if (!settings[0]) {

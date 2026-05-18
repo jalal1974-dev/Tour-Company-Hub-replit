@@ -5,10 +5,12 @@ import { Search, MapPin } from "lucide-react";
 import { useListDestinations } from "@workspace/api-client-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function DestinationsPage() {
   const { data: destinations, isLoading } = useListDestinations();
   const [search, setSearch] = useState("");
+  const { t, isEn } = useLanguage();
 
   const destList = Array.isArray(destinations) ? destinations : [];
   const filtered = destList.filter(
@@ -34,16 +36,16 @@ export default function DestinationsPage() {
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <p className="text-primary text-xs tracking-[0.3em] uppercase mb-3">استكشف معنا</p>
-            <h1 className="font-serif text-5xl text-foreground mb-3">جميع الوجهات</h1>
-            <p className="text-foreground/40 text-sm mb-8">All Destinations</p>
+            <p className="text-primary text-xs tracking-[0.3em] uppercase mb-3">{t.destTag}</p>
+            <h1 className="font-serif text-5xl text-foreground mb-3">{t.destTitle}</h1>
+            <p className="text-foreground/40 text-sm mb-8">{t.destSubtitle}</p>
 
             {/* Search */}
             <div className="max-w-md mx-auto relative">
               <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/40" />
               <input
                 type="search"
-                placeholder="ابحث عن وجهة... Search destinations..."
+                placeholder={t.destSearch}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="w-full bg-card border border-white/10 focus:border-primary text-foreground text-sm pr-10 pl-4 py-3 outline-none transition-colors"
@@ -65,7 +67,7 @@ export default function DestinationsPage() {
             </div>
           ) : !filtered?.length ? (
             <div className="text-center py-20 text-foreground/40">
-              لا توجد نتائج لبحثك / No results found
+              {t.destNoResults}
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -89,12 +91,14 @@ export default function DestinationsPage() {
                         <div className="absolute top-3 right-3 text-xl">{dest.flag}</div>
                         {dest.minPrice && (
                           <div className="absolute top-3 left-3 bg-primary text-primary-foreground text-xs px-2 py-0.5 font-semibold">
-                            من {dest.minPrice} د.أ
+                            {t.destFromPrice} {dest.minPrice} {t.destPriceSuffix}
                           </div>
                         )}
                       </div>
                       <div className="p-4 bg-card">
-                        <h3 className="font-serif text-foreground text-lg mb-0.5">{dest.nameAr}</h3>
+                        <h3 className="font-serif text-foreground text-lg mb-0.5">
+                          {isEn ? dest.nameEn : dest.nameAr}
+                        </h3>
                         <p className="text-foreground/40 text-xs mb-2">{dest.nameEn}</p>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-1 text-foreground/40 text-xs">
@@ -103,7 +107,7 @@ export default function DestinationsPage() {
                           </div>
                           {(dest.hotelCount ?? 0) > 0 && (
                             <span className="text-primary/70 text-xs">
-                              {dest.hotelCount} فندق
+                              {dest.hotelCount} {t.destHotelUnit}
                             </span>
                           )}
                         </div>

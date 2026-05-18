@@ -4,6 +4,7 @@ import { Star, Moon, Utensils, BedDouble, Phone, MessageCircle } from "lucide-re
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useGenerateQuote } from "@workspace/api-client-react";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface PackageResult {
   id: number;
@@ -39,10 +40,13 @@ export function PackageCard({ pkg, destinationNameAr, destinationNameEn, index =
   const [children, setChildren] = useState(0);
   const generateQuote = useGenerateQuote();
   const { toast } = useToast();
+  const { t, isEn } = useLanguage();
+
+  const hotelName = isEn ? pkg.hotelNameEn : pkg.hotelNameAr;
 
   const handleWhatsApp = () => {
     if (!guestName.trim()) {
-      toast({ title: "يرجى إدخال اسمك", variant: "destructive" });
+      toast({ title: t.nameRequired, variant: "destructive" });
       return;
     }
     generateQuote.mutate(
@@ -64,14 +68,17 @@ export function PackageCard({ pkg, destinationNameAr, destinationNameEn, index =
           setOpen(false);
         },
         onError: () => {
-          toast({ title: "حدث خطأ، يرجى المحاولة مجدداً", variant: "destructive" });
+          toast({ title: t.errorRetry, variant: "destructive" });
         },
       },
     );
   };
 
   const quickWhatsApp = () => {
-    const msg = `مرحباً، أود الاستفسار عن باقة:\n${destinationNameAr ? `الوجهة: ${destinationNameAr}` : ""}\nالفندق: ${pkg.hotelNameAr}\nعدد الليالي: ${pkg.nights}\nالسعر: ${pkg.finalPriceJod} د.أ`;
+    const destName = isEn ? destinationNameEn : destinationNameAr;
+    const msg = isEn
+      ? `Hello, I'd like to inquire about a package:\n${destName ? `Destination: ${destName}` : ""}\nHotel: ${pkg.hotelNameEn}\nNights: ${pkg.nights}\nPrice: ${pkg.finalPriceJod} JOD`
+      : `مرحباً، أود الاستفسار عن باقة:\n${destName ? `الوجهة: ${destName}` : ""}\nالفندق: ${pkg.hotelNameAr}\nعدد الليالي: ${pkg.nights}\nالسعر: ${pkg.finalPriceJod} د.أ`;
     const encoded = encodeURIComponent(msg);
     window.open(`https://wa.me/962777066001?text=${encoded}`, "_blank");
   };
@@ -109,7 +116,7 @@ export function PackageCard({ pkg, destinationNameAr, destinationNameEn, index =
           <div className="absolute bottom-3 left-3">
             <div className="bg-primary text-primary-foreground px-3 py-1">
               <span className="text-lg font-bold">{pkg.finalPriceJod}</span>
-              <span className="text-xs ml-1">د.أ</span>
+              <span className="text-xs ml-1">{t.jod}</span>
             </div>
           </div>
         </div>
@@ -117,7 +124,7 @@ export function PackageCard({ pkg, destinationNameAr, destinationNameEn, index =
         {/* Content */}
         <div className="p-4">
           <div className="mb-3">
-            <h3 className="font-serif text-foreground text-base font-medium leading-tight mb-0.5">{pkg.hotelNameAr}</h3>
+            <h3 className="font-serif text-foreground text-base font-medium leading-tight mb-0.5">{hotelName}</h3>
             <p className="text-foreground/40 text-xs">{pkg.hotelNameEn}</p>
             {pkg.area && (
               <p className="text-primary/70 text-xs mt-0.5">{pkg.area}</p>
@@ -126,7 +133,7 @@ export function PackageCard({ pkg, destinationNameAr, destinationNameEn, index =
 
           <div className="flex flex-wrap gap-2 mb-4">
             <span className="flex items-center gap-1 text-xs text-foreground/60 bg-muted px-2 py-1">
-              <Moon className="w-3 h-3" /> {pkg.nights} ليلة
+              <Moon className="w-3 h-3" /> {pkg.nights} {t.nightLabel}
             </span>
             <span className="flex items-center gap-1 text-xs text-foreground/60 bg-muted px-2 py-1">
               <Utensils className="w-3 h-3" /> {pkg.mealPlan}
@@ -143,7 +150,7 @@ export function PackageCard({ pkg, destinationNameAr, destinationNameEn, index =
               data-testid={`button-book-${pkg.id}`}
             >
               <Phone className="w-3 h-3" />
-              احجز الآن
+              {t.bookNow}
             </button>
             <button
               onClick={quickWhatsApp}
@@ -160,26 +167,26 @@ export function PackageCard({ pkg, destinationNameAr, destinationNameEn, index =
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="bg-card border-white/10 text-foreground max-w-sm" data-testid="dialog-inquiry">
           <DialogHeader>
-            <DialogTitle className="font-serif text-primary">استفسار عن الباقة</DialogTitle>
+            <DialogTitle className="font-serif text-primary">{t.inquiryTitle}</DialogTitle>
           </DialogHeader>
           <div className="space-y-3 mt-2">
             <div className="text-sm text-foreground/60 bg-muted/50 p-3">
-              <p className="font-medium text-foreground">{pkg.hotelNameAr}</p>
-              <p className="text-xs">{pkg.nights} ليلة · {pkg.mealPlan} · {pkg.roomType}</p>
-              <p className="text-primary font-bold mt-1">{pkg.finalPriceJod} د.أ للشخص</p>
+              <p className="font-medium text-foreground">{hotelName}</p>
+              <p className="text-xs">{pkg.nights} {t.nightLabel} · {pkg.mealPlan} · {pkg.roomType}</p>
+              <p className="text-primary font-bold mt-1">{pkg.finalPriceJod} {t.jod} {t.perPersonLabel}</p>
             </div>
             <div>
-              <label className="text-xs text-foreground/60 block mb-1">الاسم الكريم *</label>
+              <label className="text-xs text-foreground/60 block mb-1">{t.guestNameLabel}</label>
               <input
                 value={guestName}
                 onChange={(e) => setGuestName(e.target.value)}
                 className="w-full bg-muted border border-white/10 text-foreground text-sm px-3 py-2 focus:outline-none focus:border-primary"
-                placeholder="أدخل اسمك"
+                placeholder={t.guestNamePlaceholder}
                 data-testid="input-guest-name"
               />
             </div>
             <div>
-              <label className="text-xs text-foreground/60 block mb-1">رقم الهاتف</label>
+              <label className="text-xs text-foreground/60 block mb-1">{t.guestPhoneLabel}</label>
               <input
                 value={guestPhone}
                 onChange={(e) => setGuestPhone(e.target.value)}
@@ -191,7 +198,7 @@ export function PackageCard({ pkg, destinationNameAr, destinationNameEn, index =
             </div>
             <div className="flex gap-3">
               <div className="flex-1">
-                <label className="text-xs text-foreground/60 block mb-1">بالغين</label>
+                <label className="text-xs text-foreground/60 block mb-1">{t.adultsLabel}</label>
                 <input
                   type="number"
                   min={1}
@@ -203,7 +210,7 @@ export function PackageCard({ pkg, destinationNameAr, destinationNameEn, index =
                 />
               </div>
               <div className="flex-1">
-                <label className="text-xs text-foreground/60 block mb-1">أطفال</label>
+                <label className="text-xs text-foreground/60 block mb-1">{t.childrenLabel}</label>
                 <input
                   type="number"
                   min={0}
@@ -222,7 +229,7 @@ export function PackageCard({ pkg, destinationNameAr, destinationNameEn, index =
               data-testid="button-confirm-inquiry"
             >
               <Phone className="w-4 h-4" />
-              {generateQuote.isPending ? "جاري الإرسال..." : "إرسال عبر واتساب"}
+              {generateQuote.isPending ? t.sending : t.sendWhatsapp}
             </button>
           </div>
         </DialogContent>

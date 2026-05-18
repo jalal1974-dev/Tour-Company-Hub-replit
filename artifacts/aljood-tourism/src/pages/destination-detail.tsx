@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams, Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowLeft, Star, Moon, Utensils, BedDouble, Filter } from "lucide-react";
+import { ArrowLeft, BedDouble, Filter } from "lucide-react";
 import {
   useGetDestination,
   useGetDestinationSummary,
@@ -13,9 +13,11 @@ import {
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { PackageCard } from "@/components/PackageCard";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function DestinationDetailPage() {
   const { slug } = useParams<{ slug: string }>();
+  const { t, isEn } = useLanguage();
   const [filters, setFilters] = useState<{
     nights?: number;
     stars?: number;
@@ -48,9 +50,9 @@ export default function DestinationDetailPage() {
   if (!destination) {
     return (
       <div className="min-h-screen bg-background flex flex-col items-center justify-center gap-4">
-        <p className="text-foreground/60">الوجهة غير موجودة / Destination not found</p>
+        <p className="text-foreground/60">{t.destinationNotFound}</p>
         <Link href="/destinations" className="text-primary text-sm hover:underline">
-          العودة إلى الوجهات
+          {t.backToDestinations}
         </Link>
       </div>
     );
@@ -75,12 +77,12 @@ export default function DestinationDetailPage() {
               className="flex items-center gap-2 text-foreground/50 hover:text-primary text-xs mb-4 transition-colors w-fit"
               data-testid="link-back-destinations"
             >
-              <ArrowLeft className="w-3 h-3" /> جميع الوجهات / All Destinations
+              <ArrowLeft className="w-3 h-3" /> {t.backToAll}
             </Link>
             <div className="flex items-end gap-4">
               <div>
                 <h1 className="font-serif text-5xl text-foreground mb-1">
-                  {destination.nameAr}
+                  {isEn ? destination.nameEn : destination.nameAr}
                   <span className="text-2xl text-foreground/40 mr-2 ml-2">{destination.flag}</span>
                 </h1>
                 <p className="text-foreground/50 text-lg">{destination.nameEn}, {destination.country}</p>
@@ -89,16 +91,16 @@ export default function DestinationDetailPage() {
                 <div className="mr-auto flex gap-6 text-right">
                   <div>
                     <div className="text-primary font-bold text-xl">{summary.totalPackages}</div>
-                    <div className="text-foreground/40 text-xs">باقة متاحة</div>
+                    <div className="text-foreground/40 text-xs">{t.availablePackagesUnit}</div>
                   </div>
                   <div>
                     <div className="text-primary font-bold text-xl">{summary.totalHotels}</div>
-                    <div className="text-foreground/40 text-xs">فندق</div>
+                    <div className="text-foreground/40 text-xs">{t.hotelUnit}</div>
                   </div>
                   {summary.minPrice && (
                     <div>
-                      <div className="text-primary font-bold text-xl">من {summary.minPrice}</div>
-                      <div className="text-foreground/40 text-xs">د.أ للشخص</div>
+                      <div className="text-primary font-bold text-xl">{t.priceFrom} {summary.minPrice}</div>
+                      <div className="text-foreground/40 text-xs">{t.pricePerPerson}</div>
                     </div>
                   )}
                 </div>
@@ -111,17 +113,10 @@ export default function DestinationDetailPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Description */}
         {(destination.descriptionAr || destination.descriptionEn) && (
-          <div className="mb-10 grid grid-cols-1 md:grid-cols-2 gap-6">
-            {destination.descriptionAr && (
-              <p className="text-foreground/60 leading-relaxed text-sm" dir="rtl">
-                {destination.descriptionAr}
-              </p>
-            )}
-            {destination.descriptionEn && (
-              <p className="text-foreground/60 leading-relaxed text-sm" dir="ltr">
-                {destination.descriptionEn}
-              </p>
-            )}
+          <div className="mb-10">
+            <p className="text-foreground/60 leading-relaxed text-sm" dir={isEn ? "ltr" : "rtl"}>
+              {isEn ? destination.descriptionEn : destination.descriptionAr}
+            </p>
           </div>
         )}
 
@@ -130,7 +125,7 @@ export default function DestinationDetailPage() {
           <div className="mb-8 border border-white/10 p-5">
             <div className="flex items-center gap-2 mb-4">
               <Filter className="w-4 h-4 text-primary" />
-              <span className="text-sm text-foreground/70 font-medium">تصفية الباقات / Filter Packages</span>
+              <span className="text-sm text-foreground/70 font-medium">{t.filterTitle}</span>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
               {/* Nights */}
@@ -140,9 +135,9 @@ export default function DestinationDetailPage() {
                 className="bg-muted border border-white/10 text-foreground text-xs px-3 py-2 focus:outline-none focus:border-primary"
                 data-testid="select-filter-nights"
               >
-                <option value="">كل الليالي</option>
+                <option value="">{t.allNights}</option>
                 {summary.availableNights.map((n) => (
-                  <option key={n} value={n}>{n} ليالي</option>
+                  <option key={n} value={n}>{n} {t.nightsUnit}</option>
                 ))}
               </select>
 
@@ -153,9 +148,9 @@ export default function DestinationDetailPage() {
                 className="bg-muted border border-white/10 text-foreground text-xs px-3 py-2 focus:outline-none focus:border-primary"
                 data-testid="select-filter-stars"
               >
-                <option value="">كل النجوم</option>
+                <option value="">{t.allStars}</option>
                 {summary.availableStars.map((s) => (
-                  <option key={s} value={s}>{s} نجوم</option>
+                  <option key={s} value={s}>{s} {t.starsUnit}</option>
                 ))}
               </select>
 
@@ -167,7 +162,7 @@ export default function DestinationDetailPage() {
                   className="bg-muted border border-white/10 text-foreground text-xs px-3 py-2 focus:outline-none focus:border-primary"
                   data-testid="select-filter-area"
                 >
-                  <option value="">كل المناطق</option>
+                  <option value="">{t.allAreas}</option>
                   {summary.availableAreas.map((a) => (
                     <option key={a} value={a}>{a}</option>
                   ))}
@@ -181,7 +176,7 @@ export default function DestinationDetailPage() {
                 className="bg-muted border border-white/10 text-foreground text-xs px-3 py-2 focus:outline-none focus:border-primary"
                 data-testid="select-filter-meal"
               >
-                <option value="">كل الأنظمة</option>
+                <option value="">{t.allMeals}</option>
                 {summary.availableMealPlans.map((m) => (
                   <option key={m} value={m}>{m}</option>
                 ))}
@@ -193,7 +188,7 @@ export default function DestinationDetailPage() {
                 className="border border-white/10 hover:border-primary/40 text-foreground/50 hover:text-primary text-xs px-3 py-2 transition-colors"
                 data-testid="button-reset-filters"
               >
-                إزالة الفلاتر / Reset
+                {t.resetFilters}
               </button>
             </div>
           </div>
@@ -202,8 +197,8 @@ export default function DestinationDetailPage() {
         {/* Packages Grid */}
         <div>
           <h2 className="font-serif text-2xl text-foreground mb-6">
-            الباقات المتاحة
-            {packages && <span className="text-foreground/30 text-base mr-2">({packages.length} باقة)</span>}
+            {t.availPkgsTitle}
+            {packages && <span className="text-foreground/30 text-base mr-2">({packages.length} {t.pkgUnit})</span>}
           </h2>
 
           {pkgsLoading ? (
@@ -215,8 +210,8 @@ export default function DestinationDetailPage() {
           ) : !packages?.length ? (
             <div className="text-center py-20 border border-white/10">
               <BedDouble className="w-8 h-8 text-foreground/20 mx-auto mb-3" />
-              <p className="text-foreground/40 text-sm">لا توجد باقات بهذه المعايير</p>
-              <p className="text-foreground/30 text-xs mt-1">No packages match your filters</p>
+              <p className="text-foreground/40 text-sm">{t.noPackages}</p>
+              <p className="text-foreground/30 text-xs mt-1">{t.noPackagesSubtitle}</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

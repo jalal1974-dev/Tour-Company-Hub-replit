@@ -5,8 +5,10 @@ import { useListFeaturedDestinations, useListPackages } from "@workspace/api-cli
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { PackageCard } from "@/components/PackageCard";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 function HeroSection() {
+  const { t } = useLanguage();
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background */}
@@ -26,17 +28,17 @@ function HeroSection() {
           transition={{ duration: 0.8 }}
         >
           <p className="text-primary text-sm tracking-[0.3em] uppercase mb-4 font-medium">
-            الجود للسياحة والسفر
+            {t.heroTagline}
           </p>
           <h1 className="font-serif text-5xl md:text-7xl text-foreground leading-tight mb-4">
-            اكتشف العالم
-            <span className="block text-primary italic">بأسلوب راقٍ</span>
+            {t.heroTitle1}
+            <span className="block text-primary italic">{t.heroTitle2}</span>
           </h1>
           <p className="text-foreground/60 text-lg mb-2 font-light">
-            Discover the world in style
+            {t.heroSubEn}
           </p>
           <p className="text-foreground/50 text-sm max-w-lg mx-auto mb-10 leading-relaxed">
-            نقدم لك أفضل باقات السياحة إلى إسطنبول، أنطاليا، بالي، ماليزيا وأكثر من 12 وجهة فاخرة
+            {t.heroDesc}
           </p>
         </motion.div>
 
@@ -51,7 +53,7 @@ function HeroSection() {
             className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 text-sm font-semibold tracking-wide transition-colors flex items-center justify-center gap-2"
             data-testid="button-explore-destinations"
           >
-            استعرض الوجهات
+            {t.heroCta}
             <ArrowRight className="w-4 h-4" />
           </Link>
           <a
@@ -61,7 +63,7 @@ function HeroSection() {
             className="border border-primary/40 hover:border-primary text-primary px-8 py-3 text-sm font-semibold tracking-wide transition-colors text-center"
             data-testid="button-hero-whatsapp"
           >
-            تواصل معنا
+            {t.heroContact}
           </a>
         </motion.div>
       </div>
@@ -79,18 +81,19 @@ function HeroSection() {
 }
 
 function StatsBar() {
+  const { t } = useLanguage();
   const stats = [
-    { icon: MapPin, value: "13+", label: "وجهة سياحية", labelEn: "Destinations" },
-    { icon: Users, value: "5000+", label: "عميل سعيد", labelEn: "Happy Clients" },
-    { icon: Star, value: "4.9", label: "تقييم المتوسط", labelEn: "Avg Rating" },
-    { icon: Award, value: "10+", label: "سنوات خبرة", labelEn: "Years Experience" },
+    { icon: MapPin, value: "13+", label: t.statDestinations },
+    { icon: Users, value: "5000+", label: t.statClients },
+    { icon: Star, value: "4.9", label: t.statRating },
+    { icon: Award, value: "10+", label: t.statYears },
   ];
 
   return (
     <section className="py-12 border-y border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {stats.map(({ icon: Icon, value, label, labelEn }, i) => (
+          {stats.map(({ icon: Icon, value, label }, i) => (
             <motion.div
               key={label}
               initial={{ opacity: 0, y: 20 }}
@@ -98,7 +101,6 @@ function StatsBar() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
               className="text-center"
-              data-testid={`stat-${labelEn.toLowerCase().replace(/ /g, '-')}`}
             >
               <Icon className="w-5 h-5 text-primary mx-auto mb-2" />
               <div className="font-serif text-3xl text-primary font-semibold">{value}</div>
@@ -112,6 +114,7 @@ function StatsBar() {
 }
 
 function FeaturedDestinations() {
+  const { t, isEn } = useLanguage();
   const { data: destinations, isLoading } = useListFeaturedDestinations();
 
   return (
@@ -123,16 +126,14 @@ function FeaturedDestinations() {
           viewport={{ once: true }}
           className="text-center mb-14"
         >
-          <p className="text-primary text-xs tracking-[0.3em] uppercase mb-3">اكتشف معنا</p>
-          <h2 className="font-serif text-4xl text-foreground mb-3">الوجهات المميزة</h2>
-          <p className="text-foreground/40 text-sm">Featured Destinations</p>
+          <p className="text-primary text-xs tracking-[0.3em] uppercase mb-3">{t.featuredTag}</p>
+          <h2 className="font-serif text-4xl text-foreground mb-3">{t.featuredTitle}</h2>
+          <p className="text-foreground/40 text-sm">{t.featuredSubtitle}</p>
         </motion.div>
 
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="h-64 bg-muted animate-pulse" />
-            ))}
+            {[1, 2, 3].map((i) => <div key={i} className="h-64 bg-muted animate-pulse" />)}
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -157,20 +158,21 @@ function FeaturedDestinations() {
                     <div className="absolute bottom-0 left-0 right-0 p-5">
                       <div className="flex items-end justify-between">
                         <div>
-                          <h3 className="font-serif text-foreground text-xl mb-0.5">{dest.nameAr}</h3>
+                          <h3 className="font-serif text-foreground text-xl mb-0.5">
+                            {isEn ? dest.nameEn : dest.nameAr}
+                          </h3>
                           <p className="text-foreground/50 text-xs">{dest.nameEn}, {dest.country}</p>
                         </div>
                         <div className="text-right">
                           {dest.minPrice && (
                             <div className="text-primary text-sm font-semibold">
-                              من {dest.minPrice} د.أ
+                              {t.destFromPrice} {dest.minPrice} {t.destPriceSuffix}
                             </div>
                           )}
-                          <div className="text-foreground/40 text-xs">{dest.hotelCount} فندق</div>
+                          <div className="text-foreground/40 text-xs">{dest.hotelCount} {t.destHotelUnit}</div>
                         </div>
                       </div>
                     </div>
-                    {/* Hover overlay */}
                     <div className="absolute inset-0 border border-primary/0 group-hover:border-primary/30 transition-all duration-300" />
                   </div>
                 </Link>
@@ -185,7 +187,7 @@ function FeaturedDestinations() {
             className="border border-primary/40 hover:border-primary text-primary px-8 py-3 text-sm font-medium tracking-wide transition-colors inline-block"
             data-testid="button-all-destinations"
           >
-            جميع الوجهات / All Destinations
+            {t.allDestinationsBtn}
           </Link>
         </div>
       </div>
@@ -194,6 +196,7 @@ function FeaturedDestinations() {
 }
 
 function PopularPackages() {
+  const { t } = useLanguage();
   const { data: packages, isLoading } = useListPackages({ destinationSlug: "istanbul" });
 
   return (
@@ -205,9 +208,9 @@ function PopularPackages() {
           viewport={{ once: true }}
           className="text-center mb-14"
         >
-          <p className="text-primary text-xs tracking-[0.3em] uppercase mb-3">الأكثر طلباً</p>
-          <h2 className="font-serif text-4xl text-foreground mb-3">باقات إسطنبول المميزة</h2>
-          <p className="text-foreground/40 text-sm">Istanbul Popular Packages</p>
+          <p className="text-primary text-xs tracking-[0.3em] uppercase mb-3">{t.popularTag}</p>
+          <h2 className="font-serif text-4xl text-foreground mb-3">{t.popularTitle}</h2>
+          <p className="text-foreground/40 text-sm">{t.popularSubtitle}</p>
         </motion.div>
 
         {isLoading ? (
@@ -235,11 +238,12 @@ function PopularPackages() {
 }
 
 function WhyChooseUs() {
+  const { t } = useLanguage();
   const reasons = [
-    { title: "أسعار شفافة", titleEn: "Transparent Pricing", desc: "لا رسوم مخفية. السعر المعروض هو ما تدفعه فعلاً." },
-    { title: "باقات مخصصة", titleEn: "Custom Packages", desc: "نصمم رحلتك حسب ميزانيتك وتفضيلاتك." },
-    { title: "دعم 24/7", titleEn: "24/7 Support", desc: "فريقنا متاح على واتساب في أي وقت تحتاجه." },
-    { title: "فنادق مختارة", titleEn: "Curated Hotels", desc: "كل فندق في قائمتنا تم اختياره بعناية لضمان جودتك." },
+    { title: t.reason1Title, titleEn: t.reason1TitleEn, desc: t.reason1Desc },
+    { title: t.reason2Title, titleEn: t.reason2TitleEn, desc: t.reason2Desc },
+    { title: t.reason3Title, titleEn: t.reason3TitleEn, desc: t.reason3Desc },
+    { title: t.reason4Title, titleEn: t.reason4TitleEn, desc: t.reason4Desc },
   ];
 
   return (
@@ -251,15 +255,15 @@ function WhyChooseUs() {
           viewport={{ once: true }}
           className="text-center mb-14"
         >
-          <p className="text-primary text-xs tracking-[0.3em] uppercase mb-3">لماذا الجود</p>
-          <h2 className="font-serif text-4xl text-foreground mb-3">تجربتك هي أولويتنا</h2>
-          <p className="text-foreground/40 text-sm">Why Choose Al Jood</p>
+          <p className="text-primary text-xs tracking-[0.3em] uppercase mb-3">{t.whyTag}</p>
+          <h2 className="font-serif text-4xl text-foreground mb-3">{t.whyTitle}</h2>
+          <p className="text-foreground/40 text-sm">{t.whySubtitle}</p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {reasons.map(({ title, titleEn, desc }, i) => (
             <motion.div
-              key={title}
+              key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
