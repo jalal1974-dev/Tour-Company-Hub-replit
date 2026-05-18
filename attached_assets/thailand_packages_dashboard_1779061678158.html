@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thailand DMC Packages — Eid Al-Adha 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --teal: #1A7B74;
+    --teal-dark: #0E5550;
+    --teal-light: #2BBFB3;
+    --cream: #FAF6EF;
+    --ink: #1A1A2E;
+    --muted: #6B7280;
+    --red: #C0392B;
+    --card-bg: #FFFFFF;
+    --border: #E8E0D0;
+    --shadow: 0 4px 24px rgba(26,26,46,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, var(--teal-dark) 0%, var(--teal) 60%, #1B6A64 100%);
+    padding: 36px 48px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  header .header-inner {
+    max-width: 1400px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+    position: relative;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; font-weight: 900;
+    color: #fff; letter-spacing: -0.5px;
+    line-height: 1.1;
+  }
+  header h1 span { color: var(--gold-light); }
+  header p { color: rgba(255,255,255,0.75); font-size: 0.9rem; margin-top: 4px; }
+
+  .header-badge {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 50px; padding: 8px 18px;
+    color: #fff; font-size: 0.8rem; font-weight: 500;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .header-badge::before { content: '🐑'; }
+
+  /* ── CURRENCY TOGGLE ── */
+  .controls-bar {
+    background: var(--ink);
+    padding: 12px 48px;
+    display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+  }
+  .controls-bar .label { color: rgba(255,255,255,0.6); font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; }
+  .toggle-group { display: flex; gap: 4px; background: rgba(255,255,255,0.08); border-radius: 8px; padding: 3px; }
+  .toggle-btn {
+    padding: 6px 16px; border: none; border-radius: 6px; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 600;
+    background: transparent; color: rgba(255,255,255,0.6);
+    transition: all 0.2s;
+  }
+  .toggle-btn.active { background: var(--gold); color: var(--ink); }
+
+  /* ── MAIN LAYOUT ── */
+  main { max-width: 1400px; margin: 0 auto; padding: 40px 48px 80px; }
+
+  /* ── GLOBAL INPUTS ── */
+  .global-inputs {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-bottom: 36px;
+    box-shadow: var(--shadow);
+    display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-end;
+  }
+  .global-inputs h2 {
+    width: 100%;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; font-weight: 700;
+    color: var(--teal-dark);
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--cream);
+    margin-bottom: 4px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .global-inputs h2::before { content: '⚙️'; font-size: 1rem; }
+
+  .input-group { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 180px; }
+  .input-group label { font-size: 0.78rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  .input-group input {
+    padding: 10px 14px;
+    border: 1.5px solid var(--border); border-radius: 10px;
+    font-family: 'DM Mono', monospace; font-size: 0.95rem; font-weight: 500;
+    color: var(--ink); background: var(--cream);
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .input-group input:focus { border-color: var(--teal); background: white; }
+  .input-group .hint { font-size: 0.72rem; color: var(--muted); }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; font-weight: 700;
+    color: var(--ink); margin-bottom: 24px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-title::after {
+    content: ''; flex: 1; height: 2px;
+    background: linear-gradient(to right, var(--gold), transparent);
+  }
+
+  /* ── PACKAGES GRID ── */
+  .packages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+    gap: 28px;
+  }
+
+  /* ── PACKAGE CARD ── */
+  .pkg-card {
+    background: white;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .pkg-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(26,26,46,0.12); }
+
+  /* card header */
+  .card-header {
+    padding: 20px 24px 16px;
+    background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+    position: relative;
+  }
+  .card-header.gold-theme { background: linear-gradient(135deg, #7B5E1A, #C9A84C); }
+  .card-header.luxury-theme { background: linear-gradient(135deg, #1A1A2E, #2D2D5E); }
+
+  .card-ref { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: rgba(255,255,255,0.55); margin-bottom: 6px; }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem; font-weight: 700; color: white; line-height: 1.2;
+  }
+  .card-stars { color: var(--gold-light); font-size: 0.85rem; margin-top: 4px; }
+
+  .card-meta {
+    display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap;
+  }
+  .meta-tag {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px; padding: 4px 12px;
+    font-size: 0.75rem; font-weight: 600; color: white;
+  }
+  .meta-tag.honeymoon { background: rgba(201,168,76,0.3); border-color: var(--gold-light); }
+  .meta-tag.nights { background: rgba(43,191,179,0.25); }
+
+  /* itinerary */
+  .card-body { padding: 20px 24px; flex: 1; }
+
+  .hotels-list { margin-bottom: 16px; }
+  .hotels-list h3 {
+    font-size: 0.72rem; font-weight: 700; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .hotels-list h3::before { content: '🏨'; }
+
+  .hotel-row {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 8px 0; border-bottom: 1px dashed var(--border);
+  }
+  .hotel-row:last-child { border-bottom: none; }
+  .hotel-city {
+    background: var(--teal-dark); color: white;
+    border-radius: 6px; padding: 3px 10px;
+    font-size: 0.72rem; font-weight: 700; white-space: nowrap;
+    min-width: 80px; text-align: center;
+  }
+  .hotel-city.bkk { background: var(--red); }
+  .hotel-info { flex: 1; }
+  .hotel-name { font-size: 0.82rem; font-weight: 600; color: var(--ink); }
+  .hotel-details { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+
+  /* optional tours section */
+  .tours-section { margin-top: 14px; }
+  .tours-toggle {
+    display: flex; align-items: center; justify-content: space-between;
+    cursor: pointer; padding: 10px 14px;
+    background: var(--cream); border-radius: 10px;
+    border: 1px solid var(--border);
+    transition: background 0.15s;
+    user-select: none;
+  }
+  .tours-toggle:hover { background: #F0EBE0; }
+  .tours-toggle-label {
+    font-size: 0.78rem; font-weight: 700; color: var(--teal-dark);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .tours-toggle-label::before { content: '🗺️'; }
+  .tours-toggle-label .optional-badge {
+    background: #FEF3C7; color: #92400E;
+    border-radius: 4px; padding: 2px 7px; font-size: 0.68rem; font-weight: 700;
+  }
+  .tours-chevron { color: var(--teal); font-size: 0.8rem; transition: transform 0.25s; }
+  .tours-chevron.open { transform: rotate(180deg); }
+
+  .tours-content {
+    overflow: hidden;
+    max-height: 0; transition: max-height 0.35s ease;
+  }
+  .tours-content.open { max-height: 600px; }
+
+  .tours-inner { padding: 12px 14px 4px; }
+  .tour-city-group { margin-bottom: 10px; }
+  .tour-city-label {
+    font-size: 0.7rem; font-weight: 700; color: var(--teal);
+    text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 4px;
+  }
+  .tour-item {
+    display: flex; align-items: flex-start; gap: 6px;
+    font-size: 0.78rem; color: var(--muted); padding: 3px 0;
+    line-height: 1.4;
+  }
+  .tour-item::before { content: '→'; color: var(--gold); flex-shrink: 0; margin-top: 1px; }
+
+  /* ── PRICING CALCULATOR ── */
+  .pricing-section {
+    border-top: 1px solid var(--border);
+    padding: 16px 24px 20px;
+    background: #FAFAFA;
+  }
+  .pricing-section h3 {
+    font-size: 0.72rem; font-weight: 700; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .pricing-section h3::before { content: '💰'; }
+
+  .card-inputs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+  .card-input-group { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 110px; }
+  .card-input-group label { font-size: 0.68rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .card-input-group input {
+    padding: 8px 10px;
+    border: 1.5px solid var(--border); border-radius: 8px;
+    font-family: 'DM Mono', monospace; font-size: 0.85rem; font-weight: 500;
+    color: var(--ink); background: white; outline: none;
+    transition: border-color 0.2s; width: 100%;
+  }
+  .card-input-group input:focus { border-color: var(--teal); }
+
+  /* cost breakdown */
+  .cost-table { width: 100%; }
+  .cost-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 5px 0; font-size: 0.82rem;
+    border-bottom: 1px dashed #EEE;
+  }
+  .cost-row:last-of-type { border-bottom: none; }
+  .cost-row.total {
+    border-top: 2px solid var(--ink);
+    padding-top: 10px; margin-top: 6px;
+    font-weight: 700; font-size: 0.95rem; color: var(--teal-dark);
+    border-bottom: none;
+  }
+  .cost-row.profit-row { color: var(--teal); font-weight: 600; }
+  .cost-label { color: var(--muted); }
+  .cost-value {
+    font-family: 'DM Mono', monospace; font-weight: 600;
+    color: var(--ink);
+  }
+  .cost-row.total .cost-value { color: var(--teal-dark); font-size: 1.05rem; }
+
+  /* base price badge */
+  .base-price-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+    color: white; border-radius: 10px;
+    padding: 6px 14px; font-family: 'DM Mono', monospace;
+    font-size: 0.9rem; font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .base-price-badge .bp-label { font-size: 0.7rem; opacity: 0.75; font-family: 'DM Sans', sans-serif; }
+
+  /* ── NOTES SECTION ── */
+  .notes-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-top: 40px;
+    box-shadow: var(--shadow);
+  }
+  .notes-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; font-weight: 700;
+    color: var(--teal-dark); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .notes-card h2::before { content: '📋'; }
+  .notes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
+  .note-item {
+    display: flex; align-items: flex-start; gap: 8px;
+    padding: 10px 14px; background: var(--cream); border-radius: 10px;
+    font-size: 0.82rem; color: var(--ink); line-height: 1.5;
+  }
+  .note-item::before { content: '•'; color: var(--gold); font-size: 1.2rem; line-height: 1.2; flex-shrink: 0; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    header, .controls-bar, main { padding-left: 20px; padding-right: 20px; }
+    .packages-grid { grid-template-columns: 1fr; }
+    header h1 { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div>
+      <h1>🇹🇭 <span>Thailand</span> — DMC Packages</h1>
+      <p>Eid Al-Adha 2025 · Family &amp; Honeymoon Programs · All prices per person</p>
+    </div>
+    <div class="header-badge">عروض عيد الأضحى</div>
+  </div>
+</header>
+
+<div class="controls-bar">
+  <span class="label">Display Currency</span>
+  <div class="toggle-group">
+    <button class="toggle-btn active" onclick="setCurrency('JOD')">JOD</button>
+    <button class="toggle-btn" onclick="setCurrency('USD')">USD</button>
+  </div>
+  <span class="label" style="margin-left:16px">Exchange Rate: 1 JOD =</span>
+  <div style="display:flex;align-items:center;gap:6px">
+    <input id="rateInput" type="number" step="0.01" value="1.41"
+      style="width:80px;padding:5px 10px;border:1px solid rgba(255,255,255,0.2);border-radius:6px;background:rgba(255,255,255,0.1);color:white;font-family:'DM Mono',monospace;font-size:0.85rem;outline:none"
+      oninput="recalcAll()">
+    <span style="color:rgba(255,255,255,0.6);font-size:0.85rem">USD</span>
+  </div>
+</div>
+
+<main>
+  <!-- GLOBAL INPUTS -->
+  <div class="global-inputs">
+    <h2>Global Pricing Parameters</h2>
+    <div class="input-group">
+      <label>Int'l Ticket Price / Person (JOD)</label>
+      <input type="number" id="g_ticket" value="0" step="10" oninput="recalcAll()">
+      <span class="hint">Enter round-trip international airfare per person</span>
+    </div>
+    <div class="input-group">
+      <label>Profit / Person (JOD)</label>
+      <input type="number" id="g_profit" value="0" step="5" oninput="recalcAll()">
+      <span class="hint">Your margin per person</span>
+    </div>
+    <div class="input-group">
+      <label>Visa Cost / Person (JOD)</label>
+      <input type="number" id="g_visa" value="0" step="5" oninput="recalcAll()">
+      <span class="hint">Thailand e-visa if applicable</span>
+    </div>
+  </div>
+
+  <div class="section-title">Package Programs</div>
+
+  <div class="packages-grid" id="packagesGrid"></div>
+
+  <!-- IMPORTANT NOTES -->
+  <div class="notes-card">
+    <h2>Important Notes (ملاحظات هامة)</h2>
+    <div class="notes-grid">
+      <div class="note-item">If the car size doesn't match your group, please notify us in advance.</div>
+      <div class="note-item">Prices vary by group size.</div>
+      <div class="note-item">City tax is paid directly to the hotel by the guest: 10 THB per room per night.</div>
+      <div class="note-item">Single room accommodates up to 2 adults including breakfast.</div>
+      <div class="note-item">Cancellation or refund policy depends on the hotel's policy.</div>
+      <div class="note-item">The company does not guarantee refunds or modifications in case of hotel rejection.</div>
+      <div class="note-item">Domestic flight tickets are <strong>non-refundable</strong> after booking confirmation.</div>
+      <div class="note-item">Hotel check-in: 2:00 PM · Check-out: 12:00 PM.</div>
+      <div class="note-item">Tour duration is 8 hours only and does not include attraction entrance tickets.</div>
+      <div class="note-item">All tours include fuel costs and driver expenses.</div>
+      <div class="note-item">All listed daily activities and itineraries are <strong>optional</strong> and paid separately to the DMC.</div>
+      <div class="note-item">International flights are <strong>excluded</strong> from all package prices.</div>
+    </div>
+  </div>
+</main>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────────
+const packages = [
+  {
+    id: 'pkg1',
+    ref: 'Ref No 493634',
+    stars: 4,
+    title: 'Thailand — 7 Nights Family',
+    type: 'Family · 4 Adults',
+    nights: 7,
+    theme: '',
+    isHoneymoon: false,
+    basePriceJOD: 324,
+    hotels: [
+      { city: 'Phuket', nights: 4, name: 'Marina Gallery Resort Kasha Kalima B', type: 'Deluxe x2 · Breakfast incl.' },
+      { city: 'Bangkok', nights: 3, name: 'Soliitaire Bangkok Sukhumvit 11', type: 'Deluxe x2 · Breakfast incl.' },
+    ],
+    flights: 'Phuket Intl → Suvarnabhumi Bangkok (2 adults, 20kg/person)',
+    tours: {
+      'Phuket Island': [
+        'Tiger Kingdom Phuket', 'Elephant Sanctuary Phuket', 'Phuket Speedway',
+        'Zipline in beautiful forests', 'Cashew factory', 'Pearl & Silver factory',
+        'Old Town', 'Phuket Aquarium', 'Agarwood & Natural Oud visit'
+      ],
+      'Phuket Tour 2': [
+        'Fantasea Park Phuket', 'Andaman Water Garden', 'Dolphin shows', 'Elephant adventures'
+      ],
+      'Phuket Tour 3 (7 Islands)': [
+        'Full day to 7 Phi Phi islands', 'Snorkeling in crystal waters',
+        'Swimming with colorful marine life', 'Open buffet lunch on the island'
+      ],
+      'Bangkok Tour 1': [
+        'Wat Arun temple', 'Grand Palace', 'Safari World Bangkok',
+        'Siam Park City', 'City Hotel', 'Arab Street (Nana)', 'Chinatown (Bangkok)'
+      ],
+      'Bangkok Tour 2': [
+        'Central World Mall', 'Siam Paragon Mall', 'Chinatown (Asiatique)',
+        'Patpong Night Market', 'Arab Street (Nana)', 'Damnoen Saduak Floating Market'
+      ],
+    },
+    extras: ['Flower welcome at arrival'],
+  },
+  {
+    id: 'pkg2',
+    ref: 'Ref No 493626',
+    stars: 5,
+    title: 'Thailand — 8 Nights Family (5★)',
+    type: 'Family · 4 Adults',
+    nights: 8,
+    theme: 'gold-theme',
+    isHoneymoon: false,
+    basePriceJOD: 480,
+    hotels: [
+      { city: 'Bangkok', nights: 1, name: 'Movenpick Sukhumvit 15 Bangkok', type: 'Superior x2 · Breakfast incl.' },
+      { city: 'Phuket', nights: 3, name: 'The Senses Resort & Villas', type: 'Deluxe Sea View x2 · Breakfast incl.' },
+      { city: 'Phuket', nights: 2, name: 'Barceló Coconut Island', type: 'Villa with private beach access & pool view · Breakfast incl.' },
+      { city: 'Bangkok', nights: 2, name: 'Avani Bangkok Hotel, Sukhumvit 24', type: 'Premier Plus x2 · Breakfast incl.' },
+    ],
+    flights: 'Bangkok Suvarnabhumi → Phuket Intl | Phuket Intl → Bangkok Suvarnabhumi (4 adults, 20kg/person)',
+    tours: {
+      'Phuket Island': [
+        'Tiger Kingdom Phuket', 'Elephant Sanctuary', 'Speedway',
+        'Zipline in forest', 'Cashew factory', 'Pearl & Silver factory',
+        'Old Town', 'Aquarium', 'Agarwood visit'
+      ],
+      'Phuket Tour 2': [
+        'Fantasea Park', 'Andaman Water Garden', 'Dolphin shows', 'Elephant adventures'
+      ],
+      'Bangkok Tour 1': [
+        'Central World Mall', 'Siam Paragon', 'Chinatown', 'Patpong Night Market',
+        'Arab Street (Nana)', 'Damnoen Saduak Floating Market'
+      ],
+    },
+    extras: ['Flower welcome at arrival'],
+  },
+  {
+    id: 'pkg3',
+    ref: 'Ref No 493626',
+    stars: 4,
+    title: 'Thailand — 7 Nights Honeymoon (Economy)',
+    type: 'Honeymoon · 2 Adults',
+    nights: 7,
+    theme: 'gold-theme',
+    isHoneymoon: true,
+    basePriceJOD: 407,
+    hotels: [
+      { city: 'Phuket', nights: 3, name: 'Marina Gallery Resort Kasha Kalima B', type: 'Deluxe Sea View · Breakfast incl.' },
+      { city: 'Phuket', nights: 2, name: 'Malabar Villa with Pool Phuket', type: 'Villa Deluxe with Pool · Breakfast incl.' },
+      { city: 'Bangkok', nights: 2, name: 'Soliitaire Bangkok Sukhumvit 11', type: 'Grand Superior · Breakfast incl.' },
+    ],
+    flights: 'Phuket Intl → Suvarnabhumi Bangkok (2 adults, 20kg/person)',
+    tours: {
+      'Phuket Island': [
+        'Tiger Kingdom', 'Elephant Sanctuary', 'Speedway', 'Zipline', 'Cashew factory',
+        'Pearl & Silver factory', 'Old Town', 'Aquarium', 'Agarwood visit'
+      ],
+      'Phuket Tour 2': [
+        'Fantasea Park', 'Andaman Water Garden', 'Dolphin shows', 'Elephant adventures'
+      ],
+      'Phuket Tour 3 (Star Boxes)': [
+        'Star Boxes Retreat', 'Fire show', 'Natural herbs house',
+        'Natural honey house', 'Water sports resort', 'Tell El Furoud'
+      ],
+      'Bangkok Tour': [
+        'Central World Mall', 'Siam Paragon', 'Chinatown', 'Patpong Night Market',
+        'Arab Street (Nana)', 'Damnoen Saduak Floating Market'
+      ],
+    },
+    extras: ['Flower welcome', 'Honeymoon room decoration', 'Floating breakfast in pool'],
+  },
+  {
+    id: 'pkg4',
+    ref: 'Ref No 493639',
+    stars: 5,
+    title: 'Thailand — 7 Nights Family (5★)',
+    type: 'Family · 4 Adults',
+    nights: 7,
+    theme: '',
+    isHoneymoon: false,
+    basePriceJOD: 371,
+    hotels: [
+      { city: 'Phuket', nights: 4, name: 'The Senses Resort & Villas', type: 'Deluxe Sea View x2 · Breakfast incl.' },
+      { city: 'Bangkok', nights: 3, name: 'Movenpick Sukhumvit 15 Bangkok', type: 'Superior x2 · Breakfast incl.' },
+    ],
+    flights: 'Phuket Intl → Suvarnabhumi Bangkok (4 adults, 20kg/person)',
+    tours: {
+      'Phuket Island': [
+        'Tiger Kingdom', 'Elephant Sanctuary', 'Speedway', 'Zipline',
+        'Cashew factory', 'Pearl & Silver factory', 'Old Town', 'Aquarium', 'Agarwood visit'
+      ],
+      'Phuket Tour 2': [
+        'Fantasea Park', 'Andaman Water Garden', 'Dolphin shows', 'Elephant adventures'
+      ],
+      'Phuket Tour 3 (7 Islands)': [
+        'Full day to 7 Phi Phi islands', 'Snorkeling', 'Swimming with marine life',
+        'Open buffet on island'
+      ],
+      'Bangkok Tour 1': [
+        'Wat Arun', 'Grand Palace', 'Safari World', 'Siam Park City',
+        'Arab Street (Nana)', 'Chinatown'
+      ],
+      'Bangkok Tour 2': [
+        'Central World Mall', 'Siam Paragon', 'Chinatown', 'Patpong Night Market',
+        'Arab Street (Nana)', 'Damnoen Saduak Floating Market'
+      ],
+    },
+    extras: ['Flower welcome at arrival'],
+  },
+  {
+    id: 'pkg5',
+    ref: 'Ref No 493617',
+    stars: 5,
+    title: 'Thailand — 8 Nights Honeymoon (5★)',
+    type: 'Honeymoon · 2 Adults',
+    nights: 8,
+    theme: 'luxury-theme',
+    isHoneymoon: true,
+    basePriceJOD: 664,
+    hotels: [
+      { city: 'Bangkok', nights: 1, name: 'Movenpick Sukhumvit 15 Bangkok', type: 'Deluxe · Breakfast incl.' },
+      { city: 'Phuket', nights: 3, name: 'Crest Resort & Pool Villas', type: 'Deluxe Sea View · Breakfast incl.' },
+      { city: 'Phuket', nights: 2, name: 'Laqari Sinai Phuket Hotel', type: 'Studio Villa with Pool & Lagoon View · Breakfast incl.' },
+      { city: 'Bangkok', nights: 2, name: 'Avani Bangkok Hotel, Sukhumvit 24', type: 'Premier Plus · Breakfast incl.' },
+    ],
+    flights: 'Bangkok Suvarnabhumi → Phuket Intl | Phuket Intl → Bangkok Suvarnabhumi (2 adults, 20kg/person)',
+    tours: {
+      'Phuket Island': [
+        'Tiger Kingdom', 'Elephant Sanctuary', 'Speedway', 'Zipline',
+        'Cashew factory', 'Pearl & Silver factory', 'Old Town', 'Aquarium', 'Agarwood visit'
+      ],
+      'Phuket Tour 2': [
+        'Fantasea Park', 'Andaman Water Garden', 'Dolphin shows', 'Elephant adventures'
+      ],
+      'Phuket Tour 3 (Star Boxes)': [
+        'Star Boxes Retreat', 'Fire show', 'Natural herbs house',
+        'Natural honey house', 'Water sports', 'Tell El Furoud'
+      ],
+      'Bangkok Tour': [
+        'Central World Mall', 'Siam Paragon', 'Chinatown', 'Patpong Night Market',
+        'Arab Street (Nana)', 'Damnoen Saduak Floating Market'
+      ],
+    },
+    extras: ['Flower welcome', 'Honeymoon room decoration', 'Floating breakfast in pool', '1 hour snacks & chocolate complimentary'],
+  },
+  {
+    id: 'pkg6',
+    ref: 'Ref No 493632',
+    stars: 5,
+    title: 'Thailand — 7 Nights Honeymoon (5★)',
+    type: 'Honeymoon · 2 Adults',
+    nights: 7,
+    theme: 'luxury-theme',
+    isHoneymoon: true,
+    basePriceJOD: 555,
+    hotels: [
+      { city: 'Phuket', nights: 3, name: 'Wyndham Grand Villas Phuket Diamond Cliff', type: 'Deluxe Sea View · Breakfast incl.' },
+      { city: 'Phuket', nights: 2, name: 'Laqari Sinai Phuket Hotel', type: 'Studio Villa with Pool & Lagoon View · Breakfast incl.' },
+      { city: 'Bangkok', nights: 2, name: 'Avani Bangkok Hotel, Sukhumvit 24', type: 'Premier Plus · Breakfast incl.' },
+    ],
+    flights: 'Phuket Intl → Suvarnabhumi Bangkok (2 adults, 20kg/person)',
+    tours: {
+      'Phuket Island': [
+        'Tiger Kingdom', 'Elephant Sanctuary', 'Speedway', 'Zipline',
+        'Cashew factory', 'Pearl & Silver factory', 'Old Town', 'Aquarium', 'Agarwood visit'
+      ],
+      'Phuket Tour 2 (7 Islands)': [
+        'Full day to 7 Phi Phi islands', 'Snorkeling', 'Swimming with colorful marine life',
+        'Open buffet on island'
+      ],
+      'Phuket Tour 3 (Phang Nga Bay)': [
+        'Full day Phang Nga Bay', 'James Bond Island by boat',
+        'Beach of 4 islands (Kata)', 'Open buffet lunch', 'Boating around mountain caves'
+      ],
+      'Bangkok Tour': [
+        'Central World Mall', 'Siam Paragon', 'Chinatown', 'Patpong Night Market',
+        'Arab Street (Nana)', 'Damnoen Saduak Floating Market'
+      ],
+    },
+    extras: ['Flower welcome', 'Honeymoon room decoration', 'Floating breakfast in pool'],
+  },
+  {
+    id: 'pkg7',
+    ref: 'Ref No 493615',
+    stars: 4,
+    title: 'Thailand — 8 Nights Honeymoon (Economy)',
+    type: 'Honeymoon · 2 Adults',
+    nights: 8,
+    theme: 'gold-theme',
+    isHoneymoon: true,
+    basePriceJOD: 513,
+    hotels: [
+      { city: 'Bangkok', nights: 1, name: 'Al-Meerath Hotel', type: 'Superior City View · Breakfast incl.' },
+      { city: 'Phuket', nights: 3, name: 'Marina Gallery Resort Kasha Kalima B', type: 'Deluxe Sea View · Breakfast incl.' },
+      { city: 'Phuket', nights: 2, name: 'Malabar Villa with Pool Phuket', type: 'Villa Deluxe with Pool · Breakfast incl.' },
+      { city: 'Bangkok', nights: 2, name: 'Soliitaire Bangkok Sukhumvit 11', type: 'Grand Superior · Breakfast incl.' },
+    ],
+    flights: 'Bangkok Suvarnabhumi → Phuket Intl | Phuket Intl → Bangkok Suvarnabhumi (2 adults, 20kg/person)',
+    tours: {
+      'Phuket Island': [
+        'Tiger Kingdom', 'Elephant Sanctuary', 'Speedway', 'Zipline',
+        'Cashew factory', 'Pearl & Silver factory', 'Old Town', 'Aquarium', 'Agarwood visit'
+      ],
+      'Phuket Tour 2': [
+        'Fantasea Park', 'Andaman Water Garden', 'Dolphin shows', 'Elephant adventures'
+      ],
+      'Phuket Tour 3 (Star Boxes)': [
+        'Star Boxes Retreat', 'Fire show', 'Natural herbs house',
+        'Natural honey house', 'Water sports', 'Tell El Furoud'
+      ],
+      'Bangkok Tour': [
+        'Central World Mall', 'Siam Paragon', 'Chinatown', 'Patpong Night Market',
+        'Arab Street (Nana)', 'Damnoen Saduak Floating Market'
+      ],
+    },
+    extras: ['Flower welcome', 'Honeymoon room decoration', 'Floating breakfast in pool'],
+  },
+];
+
+// ── STATE ──────────────────────────────────────────────────────────────────
+let currency = 'JOD';
+let usdRate  = 1.41;
+
+function setCurrency(c) {
+  currency = c;
+  document.querySelectorAll('.toggle-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent === c);
+  });
+  recalcAll();
+}
+
+function fmt(jod) {
+  if (currency === 'USD') {
+    const rate = parseFloat(document.getElementById('rateInput').value) || 1.41;
+    return '$' + (jod * rate).toFixed(0);
+  }
+  return jod.toFixed(0) + ' JOD';
+}
+
+function getGlobals() {
+  return {
+    ticket: parseFloat(document.getElementById('g_ticket').value) || 0,
+    profit: parseFloat(document.getElementById('g_profit').value) || 0,
+    visa:   parseFloat(document.getElementById('g_visa').value)   || 0,
+  };
+}
+
+function recalcAll() {
+  usdRate = parseFloat(document.getElementById('rateInput').value) || 1.41;
+  packages.forEach(pkg => recalcCard(pkg));
+}
+
+function recalcCard(pkg) {
+  const g = getGlobals();
+  const ticket  = parseFloat(document.getElementById(`${pkg.id}_ticket`).value) || g.ticket;
+  const profit  = parseFloat(document.getElementById(`${pkg.id}_profit`).value) || g.profit;
+  const visa    = parseFloat(document.getElementById(`${pkg.id}_visa`).value)   || g.visa;
+
+  const base    = pkg.basePriceJOD;
+  const total   = base + ticket + profit + visa;
+
+  document.getElementById(`${pkg.id}_base_disp`).textContent    = fmt(base);
+  document.getElementById(`${pkg.id}_ticket_disp`).textContent  = fmt(ticket);
+  document.getElementById(`${pkg.id}_profit_disp`).textContent  = fmt(profit);
+  document.getElementById(`${pkg.id}_visa_disp`).textContent    = fmt(visa);
+  document.getElementById(`${pkg.id}_total_disp`).textContent   = fmt(total);
+}
+
+// ── RENDER ─────────────────────────────────────────────────────────────────
+function renderStars(n) {
+  return '★'.repeat(n) + '☆'.repeat(5-n);
+}
+
+function renderPackages() {
+  const grid = document.getElementById('packagesGrid');
+  grid.innerHTML = packages.map(pkg => {
+
+    // Hotels HTML
+    const hotelsHtml = pkg.hotels.map(h => `
+      <div class="hotel-row">
+        <div class="hotel-city ${h.city === 'Bangkok' ? 'bkk' : ''}">${h.city}<br><small>${h.nights}N</small></div>
+        <div class="hotel-info">
+          <div class="hotel-name">${h.name}</div>
+          <div class="hotel-details">${h.type}</div>
+        </div>
+      </div>
+    `).join('');
+
+    // Tours HTML
+    const toursHtml = Object.entries(pkg.tours).map(([city, items]) => `
+      <div class="tour-city-group">
+        <div class="tour-city-label">${city}</div>
+        ${items.map(t => `<div class="tour-item">${t}</div>`).join('')}
+      </div>
+    `).join('');
+
+    // Extras
+    const extrasHtml = pkg.extras.length ? `
+      <div style="margin-top:10px;padding:8px 12px;background:#FFF7E6;border-radius:8px;border:1px solid #FDE68A">
+        <div style="font-size:0.7rem;font-weight:700;color:#92400E;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px">🎁 Extras & Gifts</div>
+        ${pkg.extras.map(e => `<div style="font-size:0.78rem;color:#78350F;display:flex;align-items:center;gap:5px"><span style="color:#D97706">✦</span> ${e}</div>`).join('')}
+      </div>
+    ` : '';
+
+    return `
+    <div class="pkg-card">
+      <div class="card-header ${pkg.theme}">
+        <div class="card-ref">${pkg.ref}</div>
+        <div class="card-title">${pkg.title}</div>
+        <div class="card-stars">${renderStars(pkg.stars)}</div>
+        <div class="card-meta">
+          <span class="meta-tag nights">🌙 ${pkg.nights} Nights</span>
+          <span class="meta-tag">${pkg.type}</span>
+          ${pkg.isHoneymoon ? '<span class="meta-tag honeymoon">💑 Honeymoon</span>' : ''}
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="hotels-list">
+          <h3>Hotels & Accommodation</h3>
+          ${hotelsHtml}
+        </div>
+
+        <div style="margin-bottom:12px;padding:8px 12px;background:var(--cream);border-radius:8px;font-size:0.76rem;color:var(--muted)">
+          ✈️ <strong>Internal Flights:</strong> ${pkg.flights}
+        </div>
+
+        ${extrasHtml}
+
+        <div class="tours-section">
+          <div class="tours-toggle" onclick="toggleTours('${pkg.id}')">
+            <div class="tours-toggle-label">
+              Optional Activities & Itinerary
+              <span class="optional-badge">OPTIONAL · PAID TO DMC</span>
+            </div>
+            <span class="tours-chevron" id="${pkg.id}_chevron">▼</span>
+          </div>
+          <div class="tours-content" id="${pkg.id}_tours">
+            <div class="tours-inner">
+              ${toursHtml}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRICING SECTION -->
+      <div class="pricing-section">
+        <h3>Price Calculator</h3>
+
+        <div class="base-price-badge">
+          <span class="bp-label">DMC Base Price / Person</span>
+          <strong id="${pkg.id}_base_disp">${fmt(pkg.basePriceJOD)}</strong>
+        </div>
+
+        <div class="card-inputs">
+          <div class="card-input-group">
+            <label>Int'l Ticket (JOD)</label>
+            <input type="number" id="${pkg.id}_ticket" placeholder="Global" step="10" oninput="recalcCard(packages.find(p=>p.id==='${pkg.id}'))">
+          </div>
+          <div class="card-input-group">
+            <label>Profit (JOD)</label>
+            <input type="number" id="${pkg.id}_profit" placeholder="Global" step="5" oninput="recalcCard(packages.find(p=>p.id==='${pkg.id}'))">
+          </div>
+          <div class="card-input-group">
+            <label>Visa (JOD)</label>
+            <input type="number" id="${pkg.id}_visa" placeholder="Global" step="5" oninput="recalcCard(packages.find(p=>p.id==='${pkg.id}'))">
+          </div>
+        </div>
+
+        <div class="cost-table">
+          <div class="cost-row">
+            <span class="cost-label">DMC Package (hotels + internal flights)</span>
+            <span class="cost-value" id="${pkg.id}_base_disp">${fmt(pkg.basePriceJOD)}</span>
+          </div>
+          <div class="cost-row">
+            <span class="cost-label">International Ticket</span>
+            <span class="cost-value" id="${pkg.id}_ticket_disp">—</span>
+          </div>
+          <div class="cost-row profit-row">
+            <span class="cost-label">Profit Margin</span>
+            <span class="cost-value" id="${pkg.id}_profit_disp">—</span>
+          </div>
+          <div class="cost-row">
+            <span class="cost-label">Visa</span>
+            <span class="cost-value" id="${pkg.id}_visa_disp">—</span>
+          </div>
+          <div class="cost-row total">
+            <span>Total per Person</span>
+            <span class="cost-value" id="${pkg.id}_total_disp">${fmt(pkg.basePriceJOD)}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    `;
+  }).join('');
+
+  // init display
+  recalcAll();
+}
+
+function toggleTours(id) {
+  const el = document.getElementById(`${id}_tours`);
+  const ch = document.getElementById(`${id}_chevron`);
+  el.classList.toggle('open');
+  ch.classList.toggle('open');
+}
+
+// ── INIT ────────────────────────────────────────────────────────────────────
+document.getElementById('rateInput').addEventListener('input', recalcAll);
+renderPackages();
+</script>
+</body>
+</html>

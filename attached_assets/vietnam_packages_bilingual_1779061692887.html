@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vietnam DMC Packages — Eid Al-Adha 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Outfit:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#C0392B;--red-dark:#8B1A12;--gold:#D4A017;--gold-light:#F0C84A;--jade:#2E7D5C;--cream:#FAF7F2;--parchment:#EDE8DF;--white:#FFFFFF;--ink:#1C1C2E;--muted:#6B7080;--border:#DDD6CC;--shadow:0 6px 30px rgba(28,28,46,0.09);}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;}
+  html[lang="ar"] body{font-family:'Cairo',sans-serif;}
+
+  .ar{display:none;}.en{display:inline;}
+  html[lang="ar"] .ar{display:inline;}html[lang="ar"] .en{display:none;}
+
+  /* lang toggle */
+  .lang-toggle{display:flex;gap:3px;background:rgba(255,255,255,0.12);border-radius:8px;padding:3px;border:1px solid rgba(255,255,255,0.2);}
+  .lang-btn{padding:5px 14px;border:none;border-radius:6px;cursor:pointer;font-size:0.8rem;font-weight:700;background:transparent;color:rgba(255,255,255,0.6);transition:all 0.2s;}
+  .lang-btn.active{background:var(--gold);color:var(--ink);}
+
+  /* header */
+  header{background:var(--red-dark);padding:0;position:relative;overflow:hidden;}
+  .header-stripe{background:var(--gold);height:5px;width:100%;}
+  .header-body{padding:36px 56px 40px;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:20px;position:relative;z-index:1;}
+  header::before{content:'★ ★ ★ ★ ★';position:absolute;top:14px;right:56px;font-size:1.4rem;color:rgba(212,160,23,0.22);letter-spacing:8px;}
+  header::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 80%,rgba(212,160,23,0.07) 0%,transparent 55%);pointer-events:none;}
+  .header-left h1{font-family:'Libre Baskerville',serif;font-size:2.5rem;font-weight:700;color:white;line-height:1.1;}
+  html[lang="ar"] .header-left h1{font-family:'Cairo',sans-serif;font-size:2.1rem;}
+  .header-left h1 em{color:var(--gold-light);font-style:normal;}
+  .header-left p{color:rgba(255,255,255,0.68);font-size:0.88rem;margin-top:8px;}
+  .header-right{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  .header-badge{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.25);border-radius:50px;padding:9px 20px;color:white;font-size:0.8rem;font-weight:600;}
+
+  /* currency bar */
+  .cur-bar{background:var(--ink);padding:11px 56px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
+  .cb-lbl{color:rgba(255,255,255,0.48);font-size:0.74rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;}
+  html[lang="ar"] .cb-lbl{text-transform:none;letter-spacing:0;font-size:0.82rem;}
+  .tgl-group{display:flex;gap:3px;background:rgba(255,255,255,0.07);border-radius:8px;padding:3px;}
+  .tgl-btn{padding:6px 18px;border:none;border-radius:6px;cursor:pointer;font-family:'Outfit',sans-serif;font-size:0.82rem;font-weight:700;background:transparent;color:rgba(255,255,255,0.5);transition:all 0.2s;}
+  .tgl-btn.active{background:var(--gold);color:var(--ink);}
+  .rate-wrap{display:flex;align-items:center;gap:8px;margin-left:14px;}
+  .rate-wrap input{width:76px;padding:5px 10px;border:1px solid rgba(255,255,255,0.18);border-radius:6px;background:rgba(255,255,255,0.09);color:white;font-family:'DM Mono',monospace;font-size:0.82rem;outline:none;}
+  .rate-wrap span{color:rgba(255,255,255,0.5);font-size:0.82rem;}
+
+  /* main */
+  main{max-width:1400px;margin:0 auto;padding:44px 56px 80px;}
+
+  /* global panel */
+  .global-panel{background:white;border:1px solid var(--border);border-radius:18px;padding:26px 32px;margin-bottom:40px;box-shadow:var(--shadow);display:flex;flex-wrap:wrap;gap:26px;align-items:flex-end;}
+  .global-panel h2{width:100%;font-family:'Libre Baskerville',serif;font-size:1.15rem;font-weight:700;color:var(--red-dark);padding-bottom:14px;border-bottom:2px solid var(--cream);margin-bottom:2px;}
+  html[lang="ar"] .global-panel h2{font-family:'Cairo',sans-serif;font-size:1.2rem;}
+  .inp-g{display:flex;flex-direction:column;gap:6px;flex:1;min-width:190px;}
+  .inp-g label{font-size:0.71rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;}
+  html[lang="ar"] .inp-g label{font-size:0.8rem;text-transform:none;letter-spacing:0;}
+  .inp-g input{padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Mono',monospace;font-size:0.92rem;font-weight:500;color:var(--ink);background:var(--cream);outline:none;transition:border-color 0.2s;}
+  .inp-g input:focus{border-color:var(--red);background:white;}
+  .inp-g .hint{font-size:0.7rem;color:var(--muted);}
+
+  /* section title */
+  .sec-title{font-family:'Libre Baskerville',serif;font-size:1.65rem;font-weight:700;color:var(--ink);margin-bottom:26px;display:flex;align-items:center;gap:14px;}
+  html[lang="ar"] .sec-title{font-family:'Cairo',sans-serif;}
+  .sec-title::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--gold),transparent);}
+  html[lang="ar"] .sec-title::after{background:linear-gradient(to left,var(--gold),transparent);}
+
+  /* grid */
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(430px,1fr));gap:28px;}
+
+  /* card */
+  .pkg-card{background:white;border-radius:20px;border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;transition:transform 0.22s,box-shadow 0.22s;}
+  .pkg-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(28,28,46,0.13);}
+  .card-top{padding:20px 24px 28px;position:relative;overflow:hidden;}
+  .card-top.red   {background:linear-gradient(135deg,var(--red-dark),var(--red));}
+  .card-top.jade  {background:linear-gradient(135deg,#1B5E42,var(--jade));}
+  .card-top.gold  {background:linear-gradient(135deg,#7A5010,var(--gold));}
+  .card-top.dark  {background:linear-gradient(135deg,#0F1F35,#1E4060);}
+  .card-top.maroon{background:linear-gradient(135deg,#5C1A2A,#A03050);}
+  .card-top.forest{background:linear-gradient(135deg,#1A3820,#2D6040);}
+  .card-top::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:28px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 28'%3E%3Cpath fill='white' d='M0,14 C100,28 300,0 400,14 L400,28 L0,28 Z'/%3E%3C/svg%3E") no-repeat bottom;background-size:cover;}
+  .lantern{position:absolute;right:18px;top:12px;font-size:2.2rem;opacity:0.18;}
+  html[lang="ar"] .lantern{right:auto;left:18px;}
+  .ct-ref{font-family:'DM Mono',monospace;font-size:0.67rem;color:rgba(255,255,255,0.5);margin-bottom:5px;}
+  .ct-title{font-family:'Libre Baskerville',serif;font-size:1.25rem;font-weight:700;color:white;line-height:1.2;}
+  html[lang="ar"] .ct-title{font-family:'Cairo',sans-serif;font-size:1.1rem;}
+  .ct-stars{color:var(--gold-light);font-size:0.85rem;margin-top:4px;}
+  .ct-tags{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
+  .ct-tag{background:rgba(255,255,255,0.16);border:1px solid rgba(255,255,255,0.22);border-radius:20px;padding:3px 12px;font-size:0.72rem;font-weight:600;color:white;}
+  .ct-tag.honey{background:rgba(212,160,23,0.35);border-color:var(--gold-light);}
+  .ct-tag.econ{background:rgba(233,149,120,0.3);border-color:#E8A080;}
+
+  /* body */
+  .card-body{padding:18px 24px 4px;flex:1;}
+  .hotels-block{margin-bottom:14px;}
+  .hb-label{font-size:0.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.09em;margin-bottom:8px;display:flex;align-items:center;gap:5px;}
+  html[lang="ar"] .hb-label{font-size:0.78rem;text-transform:none;letter-spacing:0;}
+  .hotel-row{display:flex;align-items:flex-start;gap:9px;padding:6px 0;border-bottom:1px dashed var(--parchment);}
+  .hotel-row:last-child{border-bottom:none;}
+  .h-city{border-radius:7px;padding:3px 10px;font-size:0.68rem;font-weight:700;color:white;white-space:nowrap;min-width:72px;text-align:center;line-height:1.3;}
+  .h-city.hanoi{background:var(--red-dark);}
+  .h-city.danang{background:var(--jade);}
+  .h-city.hcm{background:#8B1A12;}
+  .h-city.phuquoc{background:#1B5E42;}
+  .hi-name{font-size:0.82rem;font-weight:700;color:var(--ink);}
+  .hi-detail{font-size:0.71rem;color:var(--muted);margin-top:2px;line-height:1.4;}
+
+  .flight-note{display:flex;align-items:flex-start;gap:8px;background:#FDF5E8;border:1px solid #F0D89A;border-radius:10px;padding:8px 13px;margin-bottom:12px;font-size:0.75rem;color:#7A5010;font-weight:500;line-height:1.4;}
+  .extras-blk{background:#FFF8E8;border:1px solid #F5DFA0;border-radius:10px;padding:9px 13px;margin-bottom:12px;}
+  .eb-lbl{font-size:0.67rem;font-weight:700;color:#7A5010;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:5px;}
+  html[lang="ar"] .eb-lbl{font-size:0.78rem;text-transform:none;letter-spacing:0;}
+  .eb-item{font-size:0.77rem;color:#78350F;display:flex;gap:6px;padding:2px 0;}
+  .eb-item::before{content:'✦';color:var(--gold);}
+
+  /* tours */
+  .tours-section{margin-bottom:12px;}
+  .tours-toggle{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:9px 13px;background:var(--cream);border-radius:10px;border:1px solid var(--border);transition:background 0.15s;user-select:none;}
+  .tours-toggle:hover{background:var(--parchment);}
+  .tt-label{font-size:0.76rem;font-weight:700;color:var(--red-dark);display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
+  html[lang="ar"] .tt-label{font-size:0.84rem;}
+  .optional-tag{background:#FEF3C7;color:#92400E;border-radius:4px;padding:2px 7px;font-size:0.66rem;font-weight:700;}
+  .tt-chev{color:var(--red);font-size:0.78rem;transition:transform 0.25s;}
+  .tt-chev.open{transform:rotate(180deg);}
+  .tours-content{overflow:hidden;max-height:0;transition:max-height 0.35s ease;}
+  .tours-content.open{max-height:700px;}
+  .tours-inner{padding:12px 14px 4px;}
+  .tc-group{margin-bottom:10px;}
+  .tc-city{font-size:0.68rem;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:4px;}
+  html[lang="ar"] .tc-city{font-size:0.78rem;text-transform:none;letter-spacing:0;}
+  .tc-item{display:flex;align-items:flex-start;gap:6px;font-size:0.77rem;color:var(--muted);padding:2px 0;line-height:1.4;}
+  .tc-item::before{content:'→';color:var(--gold);flex-shrink:0;}
+  html[lang="ar"] .tc-item::before{content:'←';}
+
+  /* pricing */
+  .pricing-section{border-top:1px solid var(--parchment);padding:16px 24px 20px;background:#FAFAF7;}
+  .ps-lbl{font-size:0.67rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.09em;margin-bottom:13px;}
+  html[lang="ar"] .ps-lbl{font-size:0.78rem;text-transform:none;letter-spacing:0;}
+  .base-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--red-dark),var(--red));color:white;border-radius:10px;padding:7px 15px;font-family:'DM Mono',monospace;font-size:0.9rem;font-weight:500;margin-bottom:13px;}
+  .bb-lbl{font-size:0.67rem;opacity:0.72;font-family:'Outfit',sans-serif;}
+  html[lang="ar"] .bb-lbl{font-family:'Cairo',sans-serif;font-size:0.75rem;}
+  .card-inputs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:13px;}
+  .ci-g{display:flex;flex-direction:column;gap:4px;flex:1;min-width:100px;}
+  .ci-g label{font-size:0.64rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;}
+  html[lang="ar"] .ci-g label{font-size:0.75rem;text-transform:none;letter-spacing:0;}
+  .ci-g input{padding:8px 10px;border:1.5px solid var(--border);border-radius:8px;font-family:'DM Mono',monospace;font-size:0.82rem;font-weight:500;color:var(--ink);background:white;outline:none;width:100%;transition:border-color 0.2s;}
+  .ci-g input:focus{border-color:var(--red);}
+  .breakdown{width:100%;}
+  .bd-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;font-size:0.81rem;border-bottom:1px dashed #E8E0D4;}
+  .bd-row:last-of-type{border-bottom:none;}
+  .bd-row.total{border-top:2px solid var(--ink);border-bottom:none;padding-top:10px;margin-top:6px;font-weight:700;font-size:0.96rem;}
+  .bd-row.profit{color:var(--jade);font-weight:600;}
+  .bd-label{color:var(--muted);}
+  .bd-value{font-family:'DM Mono',monospace;font-weight:600;color:var(--ink);}
+  .bd-row.total .bd-value{color:var(--red-dark);font-size:1.06rem;}
+
+  /* notes */
+  .notes-card{background:white;border:1px solid var(--border);border-radius:18px;padding:28px 32px;margin-top:44px;box-shadow:var(--shadow);}
+  .notes-card h2{font-family:'Libre Baskerville',serif;font-size:1.25rem;font-weight:700;color:var(--red-dark);margin-bottom:18px;}
+  html[lang="ar"] .notes-card h2{font-family:'Cairo',sans-serif;}
+  .notes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;}
+  .note-item{display:flex;gap:10px;padding:10px 14px;background:var(--cream);border-radius:10px;border:1px solid var(--parchment);font-size:0.8rem;color:var(--ink);line-height:1.5;}
+  .note-item::before{content:'◈';color:var(--red);font-size:1rem;flex-shrink:0;}
+  html[lang="ar"] .note-item{font-family:'Cairo',sans-serif;font-size:0.85rem;}
+
+  @media(max-width:768px){header .header-body,.cur-bar,main{padding-left:20px;padding-right:20px;}.cards-grid{grid-template-columns:1fr;}.header-left h1{font-size:1.8rem;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-stripe"></div>
+  <div class="header-body">
+    <div class="header-left">
+      <h1>🇻🇳 <em><span class="en">Vietnam</span><span class="ar">فيتنام</span></em> — <span class="en">DMC Packages</span><span class="ar">باقات DMC</span></h1>
+      <p><span class="en">Eid Al-Adha 2025 · Family &amp; Honeymoon Programs · All prices per person in JOD</span><span class="ar">عروض عيد الأضحى ٢٠٢٥ · برامج عائلية وشهر عسل · الأسعار للشخص بالدينار الأردني</span></p>
+    </div>
+    <div class="header-right">
+      <div class="lang-toggle">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('ar')">AR</button>
+      </div>
+      <div class="header-badge">🐑 عروض عيد الأضحى</div>
+    </div>
+  </div>
+</header>
+
+<div class="cur-bar">
+  <span class="cb-lbl"><span class="en">Currency</span><span class="ar">العملة</span></span>
+  <div class="tgl-group">
+    <button class="tgl-btn active" onclick="setCurrency('JOD')">JOD</button>
+    <button class="tgl-btn" onclick="setCurrency('USD')">USD</button>
+  </div>
+  <span class="cb-lbl" style="margin-left:14px"><span class="en">1 JOD =</span><span class="ar">١ دينار =</span></span>
+  <div class="rate-wrap">
+    <input id="rateInput" type="number" step="0.01" value="1.41" oninput="recalcAll()">
+    <span>USD</span>
+  </div>
+</div>
+
+<main>
+  <div class="global-panel">
+    <h2>⚙️ <span class="en">Global Pricing Parameters</span><span class="ar">معاملات التسعير العامة</span></h2>
+    <div class="inp-g">
+      <label><span class="en">Int'l Ticket / Person (JOD)</span><span class="ar">تذكرة دولية / شخص (دينار)</span></label>
+      <input type="number" id="g_ticket" value="0" step="10" oninput="recalcAll()">
+      <span class="hint"><span class="en">Round-trip international airfare per person</span><span class="ar">تذكرة ذهاب وعودة للشخص</span></span>
+    </div>
+    <div class="inp-g">
+      <label><span class="en">Profit / Person (JOD)</span><span class="ar">الربح / شخص (دينار)</span></label>
+      <input type="number" id="g_profit" value="0" step="5" oninput="recalcAll()">
+      <span class="hint"><span class="en">Your agency margin per person</span><span class="ar">هامش ربح الوكالة للشخص</span></span>
+    </div>
+    <div class="inp-g">
+      <label><span class="en">Visa Cost / Person (JOD)</span><span class="ar">تكلفة التأشيرة / شخص (دينار)</span></label>
+      <input type="number" id="g_visa" value="0" step="5" oninput="recalcAll()">
+      <span class="hint"><span class="en">Vietnam e-visa ~$25 USD per person</span><span class="ar">تأشيرة فيتنام الإلكترونية ~٢٥ دولار للشخص</span></span>
+    </div>
+  </div>
+
+  <div class="sec-title"><span class="en">Package Programs</span><span class="ar">برامج الباقات</span></div>
+  <div class="cards-grid" id="cardsGrid"></div>
+
+  <div class="notes-card">
+    <h2>📋 <span class="en">Important Notes</span><span class="ar">ملاحظات هامة</span></h2>
+    <div class="notes-grid" id="notesGrid"></div>
+  </div>
+</main>
+
+<script>
+const notes=[
+  {en:'If the car size doesn\'t match your group, please notify us in advance.',ar:'إذا كان حجم السيارة لا يتناسب مع عددكم والأمتعة، يرجى إبلاغنا مسبقاً.'},
+  {en:'Prices vary by group size.',ar:'مع ملاحظة اختلاف الأسعار حسب حجم المجموعة.'},
+  {en:'City tax paid directly to hotel by guest: 10 VND/room/night (approx).',ar:'يتم دفع ضريبة المدينة من قبل العميل مباشرة للفندق، ١٠ رنجت لكل غرفة لكل ليلة تقريباً.'},
+  {en:'Single room accommodates up to 2 adults with breakfast.',ar:'الغرفة الواحدة تتسع لـ ٢ كبار مع الإفطار.'},
+  {en:'Cancellation/refund policy depends on each hotel\'s individual policy.',ar:'الإلغاء أو الاسترجاع يعتمد على سياسة كل فندق.'},
+  {en:'The company does not guarantee refunds or modifications if the hotel rejects the request.',ar:'الشركة لا تضمن استرجاعاً أو تعديلاً في حالة رفض الفندق للطلب.'},
+  {en:'Domestic flight tickets are non-refundable after booking confirmation.',ar:'تذاكر الطيران الداخلي غير قابلة للاسترجاع بعد تأكيد الحجز.'},
+  {en:'Hotel check-in: 2:00 PM · Check-out: 12:00 PM.',ar:'دخول الفنادق الساعة ٢ عصراً والخروج الساعة ١٢ ظهراً.'},
+  {en:'Tour duration is 8 hours only — does not include attraction entrance tickets.',ar:'مدة اليوم السياحي ٨ ساعات فقط ولا تشمل تذاكر الدخول للأماكن السياحية.'},
+  {en:'All tours include fuel costs and driver expenses.',ar:'جميع الجولات تشمل البنزين ومصاريف السواق.'},
+  {en:'All listed daily activities are optional and paid separately to the DMC.',ar:'جميع الأنشطة اليومية المذكورة اختيارية وتُدفع بشكل منفصل للـ DMC.'},
+  {en:'International flights are excluded from all package prices.',ar:'الرحلات الدولية غير مشمولة في جميع أسعار الباقات.'},
+  {en:'Vietnam e-visa required for most nationalities — approx. $25 USD per person.',ar:'تأشيرة فيتنام الإلكترونية مطلوبة لمعظم الجنسيات — حوالي ٢٥ دولار للشخص.'},
+  {en:'Ha Long Bay cruise ticket (~$50/person) is NOT included for Package 3.',ar:'تذكرة رحلة هالونج باي (حوالي ٥٠ دولار/شخص) غير مشمولة في الباقة رقم ٣.'},
+];
+
+const packages=[
+  {
+    id:'vn1',ref:'Ref No 493126',stars:5,theme:'red',nights:8,isHoneymoon:false,isEconomy:false,basePriceJOD:443,
+    title:{en:'Vietnam — 8 Nights Family (5★)',ar:'فيتنام — ٨ ليالي عائلي ٥ نجوم'},
+    pax:{en:'Family · 4 Adults',ar:'عائلي · ٤ بالغين'},
+    hotels:[
+      {city:'Hanoi',cityAr:'هانوي',cls:'hanoi',nights:2,name:'Fraser Suites Hanoi',detail:{en:'Executive Studio x2 · Breakfast incl.',ar:'تنفيذي الاستوديو ٢ · شامل الإفطار'}},
+      {city:'Da Nang',cityAr:'دا نانغ',cls:'danang',nights:4,name:'Wyndham Golden Bay Da Nang',detail:{en:'2 Bedroom Corner Suite · Breakfast incl.',ar:'جناح 2 Bedroom Corner Suite · شامل الإفطار'}},
+      {city:'Hanoi',cityAr:'هانوي',cls:'hanoi',nights:2,name:'The Five Residences Hanoi',detail:{en:'Two Bedroom Superior · Breakfast incl.',ar:'Two Bedroom Superior · شامل الإفطار'}},
+    ],
+    flights:{en:'Hanoi Noi Bai → Da Nang Intl | Da Nang → Hanoi Noi Bai · 4 adults · 20kg/person',ar:'هانوي نوي باي → دانانق فتنام | دانانق → هانوي نوي باي · ٤ بالغين · ٢٠ كجم/شخص'},
+    extras:{en:['Flower welcome at arrival'],ar:['استقبال بالورد مجاناً عند الوصول']},
+    tours:{
+      'Hanoi / هانوي':['Cave visit / زيارة كهف','Mountain summit climb / التسلق على قمة الجبل','Countryside cycling / ركوب الدراجات في الريف','Small boat paddle tour / تجديف القوارب الصغير'],
+      'Da Nang Tour 1 / دا نانغ جولة ١':['Coconut farm tour / جوله سياحيه الى مزارع جوز الهند','Basket boat ride / ركوب قارب سلة الخيزران التقليدي','Mangrove forests & coconut trees / استكشف القنوات الصغيرة في غابة المانغروف','Net fishing with locals / حرب رمي شباك الصيد مع السكان المحليين','Traditional folk songs & crab fishing / استمتع بأداء الأغاني الشعبية التقليدية وصيد السرطانات','City walk & Hoi An river boat / بعدها الذهاب وسط المدينه وركوب القوارب على بحيرة هوي','Rice fields visit / زيارة حقول الأرز والاستمتاع المناضر الطبيعيه الخلابه'],
+      'Da Nang Tour 2 / دا نانغ جولة ٢':['Night trip to Ba Na Hills / رحلة سياحية إلى بانا هيلز عن طريق التلفريك','Golden Bridge / جسرالذهبية الشهير','Fantasy Park / مدينة الألعاب','French Village / القرية الفرنسية'],
+      'Da Nang Tour 3 / دا نانغ جولة ٣':['Amusement parks / مناطق الألعاب','Nature trails / المسارات الطبيعية','Adventures / المغامرات المثيرة'],
+      'Hanoi Tour / جولة هانوي':['Vincom Art Center / مركز فينكوم للفن المعاصر','Creative City / مدينة الإبداع في هانوي','Almaz Center / مركز ألماظ','Lotte Mart / مركز تسوق يون مول لونج بين','Vinmart / مركز تسوق لوت مارت','Ho Tai Water Garden / حديقة هو تاي المائية','Beach Mall / مركز تسوق بيج سي ثانج لونج','Palace / قصر ثانه تسونج فييت'],
+    },
+  },
+  {
+    id:'vn2',ref:'Ref No 493123',stars:4,theme:'jade',nights:8,isHoneymoon:false,isEconomy:false,basePriceJOD:408,
+    title:{en:'Vietnam — 8 Nights Family (4★)',ar:'فيتنام — ٨ ليالي عائلي ٤ نجوم'},
+    pax:{en:'Family · 4 Adults',ar:'عائلي · ٤ بالغين'},
+    hotels:[
+      {city:'Hanoi',cityAr:'هانوي',cls:'hanoi',nights:2,name:'Flora Center Hotel',detail:{en:'Deluxe x2 · Breakfast incl.',ar:'ديلوكس ٢ · شامل الإفطار'}},
+      {city:'Da Nang',cityAr:'دا نانغ',cls:'danang',nights:4,name:'Balcona Da Nang Hotel',detail:{en:'Partial Sea View Deluxe x2 · Breakfast incl.',ar:'غرفة ديلوكس مطلة جزئياً على البحر ٢ · شامل الإفطار'}},
+      {city:'Hanoi',cityAr:'هانوي',cls:'hanoi',nights:2,name:'FV Hotel An Hanoi',detail:{en:'Deluxe x2 · Breakfast incl.',ar:'ديلوكس ٢ · شامل الإفطار'}},
+    ],
+    flights:{en:'Hanoi Noi Bai → Da Nang Intl | Da Nang → Hanoi Noi Bai · 4 adults · 20kg/person',ar:'هانوي نوي باي → دانانق فتنام | دانانق → هانوي نوي باي · ٤ بالغين · ٢٠ كجم/شخص'},
+    extras:{en:['Flower welcome at arrival'],ar:['استقبال بالورد مجاناً عند الوصول']},
+    tours:{
+      'Hanoi / هانوي':['Cave visit / زيارة كهف','Mountain climb / التسلق على قمة الجبل','Countryside cycling / ركوب الدراجات في الريف','Boat paddle tour / تجديف القوارب الصغير'],
+      'Da Nang Tour 1 / دا نانغ جولة ١':['Coconut farm tour / جوله سياحيه مزارع جوز الهند','Basket boat ride / ركوب قارب سلة التقليدي','Net fishing with locals / حرب رمي شباك الصيد','Traditional folk songs / استمتع بالأغاني الشعبية التقليدية وصيد السرطانات','City walk & Hoi An river / الذهاب وسط المدينه وركوب القوارب على بحيرة هوي','Rice fields / زيارة حقول الأرز والمناضر الطبيعيه'],
+      'Da Nang Tour 2 / دا نانغ جولة ٢':['Ba Na Hills night trip / رحلة بانا هيلز التلفريك','Golden Bridge / جسر الذهبية الشهير','Fantasy Park / مدينة الألعاب','French Village / القرية الفرنسية'],
+      'Da Nang Tour 3 / دا نانغ جولة ٣':['Amusement parks / مناطق الألعاب','Nature trails / المسارات الطبيعية','Adventures / المغامرات المثيرة'],
+      'Hanoi Tour / جولة هانوي':['Vincom Art Center / مركز فينكوم للفن المعاصر','Creative City / مدينة الإبداع','Almaz Center / مركز ألماظ','Lotte Mart / يون مول لونج بين','Ho Tai Water Garden / حديقة هو تاي المائية','Vincom / فينكوم'],
+    },
+  },
+  {
+    id:'vn3',ref:'Ref No 493099',stars:5,theme:'dark',nights:8,isHoneymoon:true,isEconomy:false,basePriceJOD:700,
+    title:{en:'Vietnam — 8 Nights Honeymoon (5★)',ar:'فيتنام — ٨ ليالي شهر عسل ٥ نجوم'},
+    pax:{en:'Honeymoon · 2 Adults',ar:'شهر عسل · ٢ بالغين'},
+    hotels:[
+      {city:'Hanoi',cityAr:'هانوي',cls:'hanoi',nights:1,name:'FV Hotel An Hanoi',detail:{en:'Studio Deluxe · Breakfast incl.',ar:'ستوديو ديلوكس · شامل الإفطار'}},
+      {city:'Da Nang',cityAr:'دا نانغ',cls:'danang',nights:3,name:'Four Points by Sheraton Da Nang',detail:{en:'Panoramic Sea View Wing · Breakfast incl.',ar:'جناح بانورامي مطل على البحر · شامل الإفطار'}},
+      {city:'Da Nang',cityAr:'دا نانغ',cls:'danang',nights:2,name:'Fusion Villas & Resort Da Nang',detail:{en:'Suite with Pool & Lagoon View · Breakfast incl.',ar:'سويت مع المسبح مطل على المحيط · شامل الإفطار'}},
+      {city:'Hanoi',cityAr:'هانوي',cls:'hanoi',nights:2,name:'Movenpick Le Vinhome Westpoint',detail:{en:'Deluxe · Breakfast incl.',ar:'ديلوكس · شامل الإفطار'}},
+    ],
+    flights:{en:'Hanoi Noi Bai → Da Nang Intl | Da Nang → Hanoi Noi Bai · 2 adults · 20kg/person',ar:'هانوي نوي باي → دانانق فتنام | دانانق → هانوي نوي باي · ٢ بالغين · ٢٠ كجم/شخص'},
+    extras:{en:['Flower welcome at arrival'],ar:['استقبال بالورد مجاناً عند الوصول']},
+    tours:{
+      'Hanoi / هانوي':['Open buffet kayaking tour to Ha Long Bay / تشمل الرحله بوفيه مفتوحه التحديق بالكايك','Cave visit / زيارة الكهف المذهل','Small boats / رحلة القوارب الصغيره','Cruise to Ha Long Bay (~$50 ticket extra) / جوله سياحيه بالكروز الى خليج هالونج (لاتشمل رسوم التذكرة ~٥٠ دولار للشخص)'],
+      'Da Nang Tour 1 / دا نانغ جولة ١':['Coconut farm / مزارع جوز الهند','Basket boat ride / ركوب قارب سلة التقليدي','Net fishing / حرب رمي شباك الصيد','Folk songs & crab fishing / الأغاني الشعبية وصيد السرطانات','Rice fields / حقول الأرز والمناضر الطبيعيه'],
+      'Da Nang Tour 2 / دا نانغ جولة ٢':['Ba Na Hills / بانا هيلز التلفريك','Golden Bridge / جسر الذهبية','Fantasy Park / مدينة الألعاب','French Village / القرية الفرنسية'],
+      'Da Nang Tour 3 / دا نانغ جولة ٣':['Amusement parks / مناطق الألعاب','Nature trails / المسارات الطبيعية','Adventures / المغامرات المثيرة'],
+      'Hanoi Tour / جولة هانوي':['Vincom Art Center / مركز فينكوم','Creative City / مدينة الإبداع','Ho Tai Water Garden / حديقة هو تاي المائية','Big C Mall / فينكوم','Vincom / فينكوم با تريو'],
+    },
+  },
+  {
+    id:'vn4',ref:'Ref No 493109',stars:4,theme:'maroon',nights:8,isHoneymoon:true,isEconomy:true,basePriceJOD:484,
+    title:{en:'Vietnam — 8 Nights Honeymoon (Economy)',ar:'فيتنام — ٨ ليالي شهر عسل اقتصادي'},
+    pax:{en:'Honeymoon · 2 Adults',ar:'شهر عسل · ٢ بالغين'},
+    hotels:[
+      {city:'Hanoi',cityAr:'هانوي',cls:'hanoi',nights:2,name:'FV Hotel An Hanoi',detail:{en:'Deluxe · Breakfast incl.',ar:'ديلوكس · شامل الإفطار'}},
+      {city:'Da Nang',cityAr:'دا نانغ',cls:'danang',nights:4,name:'Balcona Da Nang Hotel',detail:{en:'Partial Sea View Deluxe · Breakfast incl.',ar:'غرفة ديلوكس مطلة جزئياً على البحر · شامل الإفطار'}},
+      {city:'Hanoi',cityAr:'هانوي',cls:'hanoi',nights:2,name:'Wyndham Garden Hanoi',detail:{en:'Deluxe · Breakfast incl.',ar:'ديلوكس · شامل الإفطار'}},
+    ],
+    flights:{en:'Hanoi Noi Bai → Da Nang Intl | Da Nang → Hanoi Noi Bai · 2 adults · 20kg/person',ar:'هانوي نوي باي → دانانق فتنام | دانانق → هانوي نوي باي · ٢ بالغين · ٢٠ كجم/شخص'},
+    extras:{en:['Flower welcome at arrival'],ar:['استقبال بالورد مجاناً عند الوصول']},
+    tours:{
+      'Hanoi / هانوي':['Cave visit / زيارة كهف','Mountain climb / التسلق على قمة الجبل','Cycling / ركوب الدراجات','Boat paddle / تجديف القوارب'],
+      'Da Nang Tour 1 / دا نانغ جولة ١':['Coconut farm / مزارع جوز الهند','Basket boat / قارب سلة','Net fishing / صيد شباك','Folk songs & crabs / الأغاني الشعبية وصيد السرطانات','Rice fields / حقول الأرز'],
+      'Da Nang Tour 2 / دا نانغ جولة ٢':['Ba Na Hills / بانا هيلز','Golden Bridge / جسر الذهبية','Fantasy Park / مدينة الألعاب','French Village / القرية الفرنسية'],
+      'Da Nang Tour 3 / دا نانغ جولة ٣':['Amusement parks / ملاهي','Nature trails / مسارات طبيعية','Adventures / مغامرات'],
+      'Hanoi Tour / جولة هانوي':['Vincom Art Center / مركز فينكوم','Creative City / مدينة الإبداع','Almaz Center / ألماظ','Ho Tai Water Garden / حديقة هو تاي','Vincom / فينكوم'],
+    },
+  },
+  {
+    id:'vn5',ref:'Ref No 493648',stars:5,theme:'forest',nights:8,isHoneymoon:true,isEconomy:false,basePriceJOD:700,
+    title:{en:'Vietnam — 8 Nights Honeymoon 5★ (Phu Quoc)',ar:'فيتنام — ٨ ليالي شهر عسل ٥ نجوم (فو كوك)'},
+    pax:{en:'Honeymoon · 2 Adults',ar:'شهر عسل · ٢ بالغين'},
+    hotels:[
+      {city:'Ho Chi Minh',cityAr:'هو تشي منه',cls:'hcm',nights:1,name:'La Siesta Premium Saigon',detail:{en:'Superior Room · Breakfast incl.',ar:'غرفه سوبيريور · شامل الإفطار'}},
+      {city:'Phu Quoc',cityAr:'جزيرة فو كوك',cls:'phuquoc',nights:3,name:'Wyndham Grand Phu Quoc',detail:{en:'Standard Ocean View · Breakfast incl.',ar:'Standard Ocean View · شامل الإفطار'}},
+      {city:'Phu Quoc',cityAr:'جزيرة فو كوك',cls:'phuquoc',nights:2,name:'Movenpick Villas & Residences Phu Quoc',detail:{en:'1-bed villa lake view with private pool · Breakfast incl.',ar:'فيلا بغرفتي نوم مطلة على الحديقة وحوض سباحة · شامل الإفطار'}},
+      {city:'Ho Chi Minh',cityAr:'هو تشي منه',cls:'hcm',nights:2,name:'La Villa Saigon',detail:{en:'Deluxe Room · Breakfast incl.',ar:'غرفه ديلوكس · شامل الإفطار'}},
+    ],
+    flights:{en:'Tan Son Nhat (HCM) → Phu Quoc Intl | Phu Quoc → Tan Son Nhat · 2 adults · 20kg/person',ar:'من مطار تان سون نهات → مطار فو كوك الدولي | من مطار فو كوك → تان سون نهات · ٢ بالغين · ٢٠ كجم/شخص'},
+    extras:{en:['Flower welcome at arrival'],ar:['استقبال بالورد مجاناً عند الوصول']},
+    tours:{
+      'Phu Quoc Tour 1 / جولة فو كوك ١':['Hon Thom cable car / تلفريك هون ثوم','Aquatopia Sun World / اكواتوبيا صن ورلد','Kim Cuoi Beach / شاطئ كيم كواي','Bridge of Love / جسر الحب','Bridge of Kisses / جسر القبلة','Hon Gam Ghi Island / جزيرة هون غام غي','Ice Forest / غابات الجليد','Sunset Night Market / سوق الغروب الليلي'],
+      'Phu Quoc Tour 2 / جولة فو كوك ٢':['Disney-like entertainment city / مدينة ترفيهيه ضخمه مثل ديزني لاند','Aquatic & electric rides & aquarium / العاب مائيه كهربائيه والاكواريوم','Mermaid show noon / واهم عرض حوريات البحر الساعه ٢ الضهر','Fountain & lights 6PM / عرض النوافير والاضاءات الساعه ٦ المساء','Vinpearl Safari / سفاري فينبرل','Grand World cafes & restaurants / قراند ورلد المطاعم والكافيهات مع عروض النوافير ليلا','Starfish Beach / شاطئ نجم البحر','Submarine & parasailing / انشطه بحريه مثل الدبابات البحريه والباراشوت'],
+      'Phu Quoc 3 Islands / جولة الجزر الثلاث':['Best 3 marine islands / رحله بحريه الى افضل ثلاث جزر بحريه في جزيرة فوكوك','Snorkeling & swimming / الاستمتاع بالسباحه وال سنوركلينغ','Full-day cruise: Hon Thom, Fingernail & Subi Island / جولة بحرية تستغرق يوما كاملا تشمل زيارة عدة جزر في نفس اليوم مثل جزيرة هون ثوم جزيرة فينقرمايل وجزيرة سوبي'],
+      'Ho Chi Minh / هو تشي منه':['Ben Thanh Market / سوق بن ثانه','Night Market / سوق بن ثانه الليلي','Saigon Center / مركز سايجون','Vincom / مركز فينكوم','Aeon Mall / ايون مول','Takashimaya / تاكاشيميا هو تشي منه'],
+    },
+  },
+  {
+    id:'vn6',ref:'Ref No 493652',stars:4,theme:'gold',nights:8,isHoneymoon:true,isEconomy:true,basePriceJOD:555,
+    title:{en:'Vietnam — 8 Nights Honeymoon Economy (Phu Quoc)',ar:'فيتنام — ٨ ليالي شهر عسل اقتصادي (فو كوك)'},
+    pax:{en:'Honeymoon · 2 Adults',ar:'شهر عسل · ٢ بالغين'},
+    hotels:[
+      {city:'Ho Chi Minh',cityAr:'هو تشي منه',cls:'hcm',nights:1,name:'Park Royal Saigon Hotel',detail:{en:'Superior Room · Breakfast incl.',ar:'غرفه سوبيريور · شامل الإفطار'}},
+      {city:'Phu Quoc',cityAr:'جزيرة فو كوك',cls:'phuquoc',nights:3,name:'Sol Bay Melia Phu Quoc',detail:{en:'Standard Ocean View · Breakfast incl.',ar:'Standard Ocean View · شامل الإفطار'}},
+      {city:'Phu Quoc',cityAr:'جزيرة فو كوك',cls:'phuquoc',nights:2,name:'Melia Vinpearl Phu Quoc',detail:{en:'1-bed villa lake view with private pool · Breakfast incl.',ar:'فيلا استوديو مطلة على الحديقة مع مسبح خاص · شامل الإفطار'}},
+      {city:'Ho Chi Minh',cityAr:'هو تشي منه',cls:'hcm',nights:2,name:'Eastin Grand Saigon',detail:{en:'Deluxe Room · Breakfast incl.',ar:'غرفه ديلوكس · شامل الإفطار'}},
+    ],
+    flights:{en:'Tan Son Nhat (HCM) → Phu Quoc Intl | Phu Quoc → Tan Son Nhat · 2 adults · 20kg/person',ar:'من مطار تان سون نهات → مطار فو كوك الدولي | من مطار فو كوك → تان سون نهات · ٢ بالغين · ٢٠ كجم/شخص'},
+    extras:{en:['Flower welcome at arrival'],ar:['استقبال بالورد مجاناً عند الوصول']},
+    tours:{
+      'Phu Quoc Tour 1 / جولة فو كوك ١':['Hon Thom cable car / تلفريك هون ثوم','Aquatopia Sun World / اكواتوبيا صن ورلد','Kim Cuoi Beach / شاطئ كيم كواي','Bridge of Love / جسر الحب','Bridge of Kisses / جسر القبلة','Hon Gam Ghi Island / جزيرة هون غام غي','Ice Forest / غابات الجليد','Sunset Night Market / سوق الغروب الليلي'],
+      'Phu Quoc Tour 2 / جولة فو كوك ٢':['Disney-like city / مدينة ترفيهيه ضخمه','Aquatic rides & aquarium / العاب مائيه والاكواريوم','Mermaid show noon / واهم عرض حوريات البحر','Fountain & lights 6PM / عرض النوافير والاضاءات','Vinpearl Safari / سفاري فينبرل','Grand World restaurants / قراند ورلد','Starfish Beach / شاطئ نجم البحر','Submarine & parasailing / دبابات بحرية وباراشوت'],
+      'Phu Quoc 3 Islands / الجزر الثلاث':['Best 3 marine islands / رحلة بحرية إلى أفضل ٣ جزر','Snorkeling & swimming / السباحه والسنوركلينغ','Full-day cruise: Hon Thom, Fingernail & Subi / جولة يوم كامل مثل جزيرة هون ثوم فينقرمايل وجزيرة سوبي'],
+      'Ho Chi Minh / هو تشي منه':['Ben Thanh Market / سوق بن ثانه','Night Market / سوق بن ثانه الليلي','Saigon Center / مركز سايجون','Vincom / فينكوم','Aeon Mall / ايون مول','Takashimaya / تاكاشيميا'],
+    },
+  },
+];
+
+let currency='JOD';
+const lanterns={red:'🏮',jade:'🌿',gold:'✨',dark:'🌊',maroon:'🌸',forest:'🌴'};
+
+function setLang(l){
+  document.getElementById('htmlRoot').setAttribute('lang',l);
+  document.getElementById('htmlRoot').setAttribute('dir',l==='ar'?'rtl':'ltr');
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.textContent===l.toUpperCase()));
+}
+function setCurrency(c){currency=c;document.querySelectorAll('.tgl-btn').forEach(b=>b.classList.toggle('active',b.textContent===c));recalcAll();}
+function fmt(jod){return currency==='USD'?'$'+(jod*(parseFloat(document.getElementById('rateInput').value)||1.41)).toFixed(0):jod.toFixed(0)+' JOD';}
+function getGlobals(){return{ticket:parseFloat(document.getElementById('g_ticket').value)||0,profit:parseFloat(document.getElementById('g_profit').value)||0,visa:parseFloat(document.getElementById('g_visa').value)||0};}
+function recalcAll(){packages.forEach(p=>recalcCard(p));}
+function recalcCard(pkg){
+  const g=getGlobals();
+  const ticket=parseFloat(document.getElementById(`${pkg.id}_ticket`).value)||g.ticket;
+  const profit=parseFloat(document.getElementById(`${pkg.id}_profit`).value)||g.profit;
+  const visa=parseFloat(document.getElementById(`${pkg.id}_visa`).value)||g.visa;
+  const total=pkg.basePriceJOD+ticket+profit+visa;
+  document.getElementById(`${pkg.id}_bb`).textContent=fmt(pkg.basePriceJOD);
+  document.getElementById(`${pkg.id}_base`).textContent=fmt(pkg.basePriceJOD);
+  document.getElementById(`${pkg.id}_tkt`).textContent=fmt(ticket);
+  document.getElementById(`${pkg.id}_pft`).textContent=fmt(profit);
+  document.getElementById(`${pkg.id}_vis`).textContent=fmt(visa);
+  document.getElementById(`${pkg.id}_tot`).textContent=fmt(total);
+}
+function stars(n){return'★'.repeat(n)+'☆'.repeat(5-n);}
+function toggleTours(id){document.getElementById(`${id}_tours`).classList.toggle('open');document.getElementById(`${id}_chev`).classList.toggle('open');}
+
+function renderCards(){
+  document.getElementById('cardsGrid').innerHTML=packages.map(pkg=>{
+    const hotelsHtml=pkg.hotels.map(h=>`
+      <div class="hotel-row">
+        <div class="h-city ${h.cls}"><span class="en">${h.city}</span><span class="ar">${h.cityAr}</span><br><small>${h.nights}N</small></div>
+        <div>
+          <div class="hi-name">${h.name}</div>
+          <div class="hi-detail"><span class="en">${h.detail.en}</span><span class="ar">${h.detail.ar}</span></div>
+        </div>
+      </div>`).join('');
+    const toursHtml=Object.entries(pkg.tours).map(([city,items])=>`
+      <div class="tc-group">
+        <div class="tc-city">${city}</div>
+        ${items.map(i=>`<div class="tc-item">${i}</div>`).join('')}
+      </div>`).join('');
+    return `
+    <div class="pkg-card">
+      <div class="card-top ${pkg.theme}">
+        <div class="lantern">${lanterns[pkg.theme]||'🏮'}</div>
+        <div class="ct-ref">${pkg.ref}</div>
+        <div class="ct-title"><span class="en">${pkg.title.en}</span><span class="ar">${pkg.title.ar}</span></div>
+        <div class="ct-stars">${stars(pkg.stars)}</div>
+        <div class="ct-tags">
+          <span class="ct-tag">🌙 ${pkg.nights} <span class="en">Nights</span><span class="ar">ليالي</span></span>
+          <span class="ct-tag ${pkg.isHoneymoon?'honey':''}"><span class="en">${pkg.pax.en}</span><span class="ar">${pkg.pax.ar}</span></span>
+          ${pkg.isHoneymoon?`<span class="ct-tag honey">💑 <span class="en">Honeymoon</span><span class="ar">شهر عسل</span></span>`:''}
+          ${pkg.isEconomy?`<span class="ct-tag econ"><span class="en">Economy</span><span class="ar">اقتصادي</span></span>`:''}
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="hotels-block">
+          <div class="hb-label">🏨 <span class="en">Hotels & Accommodation</span><span class="ar">الفنادق والإقامة</span></div>
+          ${hotelsHtml}
+        </div>
+        <div class="flight-note">✈️ <strong><span class="en">Internal Flights:</span><span class="ar">الرحلات الداخلية:</span></strong>&nbsp;<span class="en">${pkg.flights.en}</span><span class="ar">${pkg.flights.ar}</span></div>
+        <div class="extras-blk">
+          <div class="eb-lbl">🎁 <span class="en">Extras & Gifts</span><span class="ar">الهدايا والخدمات الإضافية</span></div>
+          ${pkg.extras.en.map((e,i)=>`<div class="eb-item"><span class="en">${e}</span><span class="ar">${pkg.extras.ar[i]||e}</span></div>`).join('')}
+        </div>
+        <div class="tours-section">
+          <div class="tours-toggle" onclick="toggleTours('${pkg.id}')">
+            <div class="tt-label">🗺️ <span class="en">Optional Activities & Itinerary</span><span class="ar">الأنشطة الاختيارية والجولات</span>
+              <span class="optional-tag"><span class="en">OPTIONAL · PAID TO DMC</span><span class="ar">اختياري · يدفع للـ DMC</span></span>
+            </div>
+            <span class="tt-chev" id="${pkg.id}_chev">▼</span>
+          </div>
+          <div class="tours-content" id="${pkg.id}_tours"><div class="tours-inner">${toursHtml}</div></div>
+        </div>
+      </div>
+      <div class="pricing-section">
+        <div class="ps-lbl">💰 <span class="en">Price Calculator (per person)</span><span class="ar">حاسبة السعر (للشخص)</span></div>
+        <div class="base-badge">
+          <span class="bb-lbl"><span class="en">DMC Base Price / Person</span><span class="ar">سعر DMC الأساسي / شخص</span></span>
+          <strong id="${pkg.id}_bb">${fmt(pkg.basePriceJOD)}</strong>
+        </div>
+        <div class="card-inputs">
+          <div class="ci-g"><label><span class="en">Int'l Ticket (JOD)</span><span class="ar">تذكرة دولية (دينار)</span></label><input type="number" id="${pkg.id}_ticket" placeholder="Global" step="10" oninput="recalcCard(packages.find(p=>p.id==='${pkg.id}'))"></div>
+          <div class="ci-g"><label><span class="en">Profit (JOD)</span><span class="ar">الربح (دينار)</span></label><input type="number" id="${pkg.id}_profit" placeholder="Global" step="5" oninput="recalcCard(packages.find(p=>p.id==='${pkg.id}'))"></div>
+          <div class="ci-g"><label><span class="en">Visa (JOD)</span><span class="ar">التأشيرة (دينار)</span></label><input type="number" id="${pkg.id}_visa" placeholder="Global" step="5" oninput="recalcCard(packages.find(p=>p.id==='${pkg.id}'))"></div>
+        </div>
+        <div class="breakdown">
+          <div class="bd-row"><span class="bd-label"><span class="en">DMC Package (hotels + internal flights)</span><span class="ar">باقة DMC (فنادق + رحلات داخلية)</span></span><span class="bd-value" id="${pkg.id}_base">${fmt(pkg.basePriceJOD)}</span></div>
+          <div class="bd-row"><span class="bd-label"><span class="en">International Ticket</span><span class="ar">التذكرة الدولية</span></span><span class="bd-value" id="${pkg.id}_tkt">—</span></div>
+          <div class="bd-row profit"><span class="bd-label"><span class="en">Profit Margin</span><span class="ar">هامش الربح</span></span><span class="bd-value" id="${pkg.id}_pft">—</span></div>
+          <div class="bd-row"><span class="bd-label"><span class="en">Visa</span><span class="ar">التأشيرة</span></span><span class="bd-value" id="${pkg.id}_vis">—</span></div>
+          <div class="bd-row total"><span><span class="en">Total per Person</span><span class="ar">الإجمالي للشخص</span></span><span class="bd-value" id="${pkg.id}_tot">${fmt(pkg.basePriceJOD)}</span></div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('notesGrid').innerHTML=notes.map(n=>`<div class="note-item"><span class="en">${n.en}</span><span class="ar">${n.ar}</span></div>`).join('');
+  recalcAll();
+}
+document.getElementById('rateInput').addEventListener('input',recalcAll);
+renderCards();
+</script>
+</body>
+</html>

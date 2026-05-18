@@ -1,0 +1,294 @@
+Build a FULL PRODUCTION tourism website for my company “الجود للسياحة والسفر | Al Jood Travel & Tourism”.
+
+IMPORTANT:
+I already have around 14 HTML pricing dashboards and charter flight dashboards.
+The attached HTML files are NOT frontend pages for customers.
+They are INTERNAL ADMIN / BACKEND pricing engines.
+
+You MUST use the attached HTML dashboards as the backend pricing source and pricing logic engine for every destination.
+
+========================================================
+PROJECT GOAL
+========================================================
+
+Create a luxury modern tourism website where:
+
+1. Customers ONLY see final package prices and tourism offers.
+2. Customers MUST NOT see:
+   - Ticket price inputs
+   - Profit inputs
+   - Internal calculations
+   - Exchange rates
+   - Admin settings
+   - Pricing formulas
+   - Backend controls
+   - Any hidden pricing logic
+
+3. Admins and employees CAN:
+   - Update ticket prices
+   - Update profit
+   - Update hotel costs
+   - Update charter flights
+   - Update exchange rates
+   - Update packages easily
+
+4. Any admin update automatically updates all frontend customer prices.
+
+========================================================
+IMPORTANT ARCHITECTURE
+========================================================
+
+The attached dashboards already contain:
+- Pricing formulas
+- Hotel databases
+- Destination logic
+- Room types
+- Seasonal prices
+- Currency conversion
+- Charter calculations
+- Profit calculations
+
+DO NOT rebuild pricing logic from scratch.
+
+INSTEAD:
+Convert the attached HTML dashboards into:
+- hidden backend pricing modules
+- admin calculation engines
+- data providers for frontend pages
+
+========================================================
+DESTINATIONS
+========================================================
+
+I have around 14 destinations such as:
+- Istanbul
+- Antalya
+- Trabzon
+- Sharm El Sheikh
+- Indonesia
+- Malaysia
+- Maldives
+- Georgia
+- Russia
+- etc.
+
+Each destination should have:
+- Its own beautiful landing page
+- Hero image/video
+- Hotel packages
+- Filters
+- Package cards
+- WhatsApp inquiry button
+- PDF quotation generator
+
+========================================================
+FRONTEND WEBSITE REQUIREMENTS
+========================================================
+
+Create a VERY LUXURY MODERN UI.
+
+Style:
+- Premium travel agency style
+- Dark luxury + gold accents
+- Arabic + English support
+- Mobile-first responsive
+- Very fast loading
+- Smooth animations
+- Professional cards
+- Elegant typography
+- Clean tourism booking experience
+
+Use:
+- React or Next.js
+- Tailwind CSS
+- Modern responsive layout
+- Component architecture
+
+========================================================
+CUSTOMER EXPERIENCE
+========================================================
+
+CUSTOMER MUST BE ABLE TO:
+
+1. Open any destination page
+2. Browse packages
+3. Filter by:
+   - Nights
+   - Hotel stars
+   - Area
+   - Meal plan
+   - Room type
+   - Budget
+4. See final package price ONLY
+5. Select hotel/package
+6. Click:
+   - WhatsApp
+   - Request Offer
+   - Download PDF Quote
+
+========================================================
+VERY IMPORTANT:
+HIDE ALL INTERNAL SETTINGS
+========================================================
+
+The frontend customer pages MUST NEVER expose:
+- ticket price
+- profit
+- exchange rate
+- admin controls
+- calculations
+- formulas
+- backend settings
+
+These settings exist ONLY in:
+- admin dashboard
+- hidden backend panel
+
+========================================================
+ADMIN PANEL REQUIREMENTS
+========================================================
+
+Create a separate secure admin panel.
+
+Admin panel should include:
+- Login page
+- Protected routes
+- Employee/admin roles
+
+Admin features:
+- Edit ticket prices
+- Edit profit margins
+- Edit transportation fees
+- Edit exchange rates
+- Edit hotel prices
+- Edit package availability
+- Enable/disable packages
+- Manage destinations
+- Upload new package data
+
+VERY IMPORTANT:
+The admin panel should reuse the logic from the attached HTML dashboards.
+
+========================================================
+PRICING ENGINE
+========================================================
+
+Use the attached dashboards as:
+- hidden pricing engines
+- backend logic processors
+
+Extract:
+- hotel data
+- formulas
+- room calculations
+- periods
+- currencies
+- package calculations
+
+Then:
+- expose ONLY final calculated results to frontend users
+
+========================================================
+PDF OFFER GENERATOR
+========================================================
+
+When customer selects a package:
+Generate a professional PDF quotation automatically.
+
+PDF should include:
+- Company logo
+- “الجود للسياحة والسفر”
+- Destination
+- Hotel
+- Room type
+- Number of nights
+- Included services
+- Final price
+- WhatsApp number
+- Terms and conditions
+
+Design:
+- Luxury tourism quotation style
+- Professional travel agency branding
+- Arabic-friendly layout
+- Printable
+- Mobile friendly
+
+========================================================
+WHATSAPP INTEGRATION
+========================================================
+
+Every package card should have:
+“Book on WhatsApp”
+
+Use this number:
++962777066001
+
+The WhatsApp message should auto-fill:
+- destination
+- hotel
+- nights
+- selected package
+- final price
+
+========================================================
+DATA STRUCTURE
+========================================================
+
+Separate:
+1. Backend pricing engine
+2. Frontend customer display
+
+Suggested architecture:
+- /admin
+- /frontend
+- /pricing-engine
+- /destinations
+- /pdf-generator
+
+========================================================
+VERY IMPORTANT SECURITY REQUIREMENTS
+========================================================
+
+Customers must NEVER access:
+- pricing formulas
+- hidden calculations
+- raw dashboard files
+- admin pages
+- profit values
+- internal costs
+
+Protect all backend APIs.
+
+========================================================
+OUTPUT REQUIREMENTS
+========================================================
+
+Build:
+1. Complete frontend tourism website
+2. Secure admin dashboard
+3. Dynamic pricing system
+4. PDF quotation generator
+5. WhatsApp integration
+6. Destination pages
+7. Hotel package system
+8. Responsive mobile UI
+9. Reusable component structure
+10. Production-ready code
+
+========================================================
+FINAL IMPORTANT NOTE
+========================================================
+
+The attached HTML dashboards are the MAIN SOURCE OF LOGIC.
+DO NOT discard them.
+DO NOT rebuild calculations manually.
+Convert them into reusable backend pricing modules.
+
+Frontend customers should only see:
+- beautiful tourism packages
+- final prices
+- hotel information
+- booking actions
+
+Admins should control everything from hidden backend/admin dashboard.

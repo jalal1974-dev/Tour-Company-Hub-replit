@@ -3,20 +3,26 @@ info:
   # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: Al Jood Travel & Tourism API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: destinations
+    description: Destination pages and packages
+  - name: admin
+    description: Admin panel operations
+  - name: quotes
+    description: PDF quote generation
+
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,6 +30,498 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /destinations:
+    get:
+      operationId: listDestinations
+      tags: [destinations]
+      summary: List all active destinations
+      responses:
+        "200":
+          description: List of destinations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Destination"
+
+  /destinations/featured:
+    get:
+      operationId: listFeaturedDestinations
+      tags: [destinations]
+      summary: List featured destinations for homepage
+      responses:
+        "200":
+          description: Featured destinations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Destination"
+
+  /destinations/{slug}:
+    get:
+      operationId: getDestination
+      tags: [destinations]
+      summary: Get destination details
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Destination details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Destination"
+        "404":
+          description: Not found
+
+  /packages:
+    get:
+      operationId: listPackages
+      tags: [destinations]
+      summary: List computed packages with final prices (filter by destination, nights, stars, etc.)
+      parameters:
+        - name: destinationSlug
+          in: query
+          schema:
+            type: ["string", "null"]
+        - name: nights
+          in: query
+          schema:
+            type: ["integer", "null"]
+        - name: stars
+          in: query
+          schema:
+            type: ["integer", "null"]
+        - name: area
+          in: query
+          schema:
+            type: ["string", "null"]
+        - name: mealPlan
+          in: query
+          schema:
+            type: ["string", "null"]
+        - name: roomType
+          in: query
+          schema:
+            type: ["string", "null"]
+        - name: maxPrice
+          in: query
+          schema:
+            type: ["number", "null"]
+        - name: minPrice
+          in: query
+          schema:
+            type: ["number", "null"]
+      responses:
+        "200":
+          description: Computed packages with final prices
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PackageResult"
+
+  /destinations/{slug}/summary:
+    get:
+      operationId: getDestinationSummary
+      tags: [destinations]
+      summary: Get destination summary stats (price ranges, hotel counts)
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Destination summary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DestinationSummary"
+
+  /quotes:
+    post:
+      operationId: generateQuote
+      tags: [quotes]
+      summary: Generate PDF quotation for a package
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuoteRequest"
+      responses:
+        "200":
+          description: PDF quote data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuoteResponse"
+
+  /admin/login:
+    post:
+      operationId: adminLogin
+      tags: [admin]
+      summary: Admin login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminCredentials"
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminSession"
+        "401":
+          description: Invalid credentials
+
+  /admin/logout:
+    post:
+      operationId: adminLogout
+      tags: [admin]
+      summary: Admin logout
+      responses:
+        "200":
+          description: Logged out
+
+  /admin/me:
+    get:
+      operationId: getAdminMe
+      tags: [admin]
+      summary: Get current admin session
+      responses:
+        "200":
+          description: Current session
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminSession"
+        "401":
+          description: Not authenticated
+
+  /admin/settings:
+    get:
+      operationId: getAdminSettings
+      tags: [admin]
+      summary: Get global pricing settings
+      responses:
+        "200":
+          description: Settings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PricingSettings"
+    put:
+      operationId: updateAdminSettings
+      tags: [admin]
+      summary: Update global pricing settings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PricingSettingsInput"
+      responses:
+        "200":
+          description: Updated settings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PricingSettings"
+
+  /admin/stats:
+    get:
+      operationId: getAdminStats
+      tags: [admin]
+      summary: Dashboard statistics
+      responses:
+        "200":
+          description: Stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminStats"
+
+  /admin/destinations:
+    get:
+      operationId: listAdminDestinations
+      tags: [admin]
+      summary: List all destinations (admin)
+      responses:
+        "200":
+          description: All destinations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Destination"
+    post:
+      operationId: createAdminDestination
+      tags: [admin]
+      summary: Create destination
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DestinationInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Destination"
+
+  /admin/destinations/{id}:
+    get:
+      operationId: getAdminDestination
+      tags: [admin]
+      summary: Get destination (admin)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Destination
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Destination"
+    put:
+      operationId: updateAdminDestination
+      tags: [admin]
+      summary: Update destination
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DestinationInput"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Destination"
+    delete:
+      operationId: deleteAdminDestination
+      tags: [admin]
+      summary: Delete destination
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  /admin/hotels:
+    get:
+      operationId: listAdminHotels
+      tags: [admin]
+      summary: List all hotels (admin)
+      parameters:
+        - name: destinationId
+          in: query
+          schema:
+            type: ["integer", "null"]
+      responses:
+        "200":
+          description: Hotels
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Hotel"
+    post:
+      operationId: createAdminHotel
+      tags: [admin]
+      summary: Create hotel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HotelInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Hotel"
+
+  /admin/hotels/{id}:
+    put:
+      operationId: updateAdminHotel
+      tags: [admin]
+      summary: Update hotel
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HotelInput"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Hotel"
+    delete:
+      operationId: deleteAdminHotel
+      tags: [admin]
+      summary: Delete hotel
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  /admin/packages:
+    get:
+      operationId: listAdminPackages
+      tags: [admin]
+      summary: List all packages (admin)
+      parameters:
+        - name: destinationId
+          in: query
+          schema:
+            type: ["integer", "null"]
+        - name: hotelId
+          in: query
+          schema:
+            type: ["integer", "null"]
+      responses:
+        "200":
+          description: Packages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Package"
+    post:
+      operationId: createAdminPackage
+      tags: [admin]
+      summary: Create package
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PackageInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Package"
+
+  /admin/packages/{id}:
+    put:
+      operationId: updateAdminPackage
+      tags: [admin]
+      summary: Update package
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PackageInput"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Package"
+    delete:
+      operationId: deleteAdminPackage
+      tags: [admin]
+      summary: Delete package
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  /admin/packages/{id}/toggle:
+    patch:
+      operationId: toggleAdminPackage
+      tags: [admin]
+      summary: Enable or disable a package
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PackageToggle"
+      responses:
+        "200":
+          description: Toggled
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Package"
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +532,397 @@ components:
       required:
         - status
 
+    Destination:
+      type: object
+      required: [id, slug, nameAr, nameEn, country, heroImage, isActive, isFeatured, sortOrder]
+      properties:
+        id:
+          type: integer
+        slug:
+          type: string
+        nameAr:
+          type: string
+        nameEn:
+          type: string
+        country:
+          type: string
+        descriptionAr:
+          type: ["string", "null"]
+        descriptionEn:
+          type: ["string", "null"]
+        heroImage:
+          type: string
+        flag:
+          type: ["string", "null"]
+        isActive:
+          type: boolean
+        isFeatured:
+          type: boolean
+        sortOrder:
+          type: integer
+        hotelCount:
+          type: ["integer", "null"]
+        minPrice:
+          type: ["number", "null"]
+
+    DestinationInput:
+      type: object
+      required: [slug, nameAr, nameEn, country, heroImage]
+      properties:
+        slug:
+          type: string
+        nameAr:
+          type: string
+        nameEn:
+          type: string
+        country:
+          type: string
+        descriptionAr:
+          type: ["string", "null"]
+        descriptionEn:
+          type: ["string", "null"]
+        heroImage:
+          type: string
+        flag:
+          type: ["string", "null"]
+        isActive:
+          type: boolean
+        isFeatured:
+          type: boolean
+        sortOrder:
+          type: integer
+
+    DestinationSummary:
+      type: object
+      required: [slug, totalHotels, totalPackages, minPrice, maxPrice, availableNights, availableAreas, availableMealPlans, availableStars]
+      properties:
+        slug:
+          type: string
+        totalHotels:
+          type: integer
+        totalPackages:
+          type: integer
+        minPrice:
+          type: ["number", "null"]
+        maxPrice:
+          type: ["number", "null"]
+        availableNights:
+          type: array
+          items:
+            type: integer
+        availableAreas:
+          type: array
+          items:
+            type: string
+        availableMealPlans:
+          type: array
+          items:
+            type: string
+        availableStars:
+          type: array
+          items:
+            type: integer
+
+    Hotel:
+      type: object
+      required: [id, destinationId, nameAr, nameEn, stars, area, isActive]
+      properties:
+        id:
+          type: integer
+        destinationId:
+          type: integer
+        nameAr:
+          type: string
+        nameEn:
+          type: string
+        stars:
+          type: integer
+        area:
+          type: ["string", "null"]
+        description:
+          type: ["string", "null"]
+        imageUrl:
+          type: ["string", "null"]
+        isActive:
+          type: boolean
+
+    HotelInput:
+      type: object
+      required: [destinationId, nameAr, nameEn, stars]
+      properties:
+        destinationId:
+          type: integer
+        nameAr:
+          type: string
+        nameEn:
+          type: string
+        stars:
+          type: integer
+        area:
+          type: ["string", "null"]
+        description:
+          type: ["string", "null"]
+        imageUrl:
+          type: ["string", "null"]
+        isActive:
+          type: boolean
+
+    Package:
+      type: object
+      required: [id, hotelId, destinationId, nights, mealPlan, roomType, basePriceUsd, currency, isActive]
+      properties:
+        id:
+          type: integer
+        hotelId:
+          type: integer
+        destinationId:
+          type: integer
+        nights:
+          type: integer
+        mealPlan:
+          type: string
+        roomType:
+          type: string
+        basePriceUsd:
+          type: number
+        currency:
+          type: string
+        dateFrom:
+          type: ["string", "null"]
+        dateTo:
+          type: ["string", "null"]
+        isActive:
+          type: boolean
+        hotelNameAr:
+          type: ["string", "null"]
+        hotelNameEn:
+          type: ["string", "null"]
+        hotelStars:
+          type: ["integer", "null"]
+        hotelArea:
+          type: ["string", "null"]
+
+    PackageInput:
+      type: object
+      required: [hotelId, destinationId, nights, mealPlan, roomType, basePriceUsd, currency]
+      properties:
+        hotelId:
+          type: integer
+        destinationId:
+          type: integer
+        nights:
+          type: integer
+        mealPlan:
+          type: string
+        roomType:
+          type: string
+        basePriceUsd:
+          type: number
+        currency:
+          type: string
+        dateFrom:
+          type: ["string", "null"]
+        dateTo:
+          type: ["string", "null"]
+        isActive:
+          type: boolean
+
+    PackageToggle:
+      type: object
+      required: [isActive]
+      properties:
+        isActive:
+          type: boolean
+
+    PackageResult:
+      type: object
+      required: [id, hotelId, hotelNameAr, hotelNameEn, stars, area, mealPlan, roomType, nights, finalPriceJod, isActive]
+      properties:
+        id:
+          type: integer
+        hotelId:
+          type: integer
+        hotelNameAr:
+          type: string
+        hotelNameEn:
+          type: string
+        stars:
+          type: integer
+        area:
+          type: ["string", "null"]
+        mealPlan:
+          type: string
+        roomType:
+          type: string
+        nights:
+          type: integer
+        finalPriceJod:
+          type: number
+        finalPriceUsd:
+          type: ["number", "null"]
+        dateFrom:
+          type: ["string", "null"]
+        dateTo:
+          type: ["string", "null"]
+        isActive:
+          type: boolean
+        hotelImageUrl:
+          type: ["string", "null"]
+        hotelDescription:
+          type: ["string", "null"]
+
+    PricingSettings:
+      type: object
+      required: [id, ticketPriceJod, transportJod, fixedProfitJod, profitPct, rateUsdToJod, rateEurToJod, rateSarToJod, whatsappNumber, updatedAt]
+      properties:
+        id:
+          type: integer
+        ticketPriceJod:
+          type: number
+        transportJod:
+          type: number
+        fixedProfitJod:
+          type: number
+        profitPct:
+          type: number
+        rateUsdToJod:
+          type: number
+        rateEurToJod:
+          type: number
+        rateSarToJod:
+          type: number
+        whatsappNumber:
+          type: string
+        updatedAt:
+          type: string
+
+    PricingSettingsInput:
+      type: object
+      properties:
+        ticketPriceJod:
+          type: number
+        transportJod:
+          type: number
+        fixedProfitJod:
+          type: number
+        profitPct:
+          type: number
+        rateUsdToJod:
+          type: number
+        rateEurToJod:
+          type: number
+        rateSarToJod:
+          type: number
+        whatsappNumber:
+          type: string
+
+    AdminCredentials:
+      type: object
+      required: [username, password]
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+
+    AdminSession:
+      type: object
+      required: [id, username, role]
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+        role:
+          type: string
+
+    AdminStats:
+      type: object
+      required: [totalDestinations, totalHotels, totalPackages, activePackages, destinations]
+      properties:
+        totalDestinations:
+          type: integer
+        totalHotels:
+          type: integer
+        totalPackages:
+          type: integer
+        activePackages:
+          type: integer
+        destinations:
+          type: array
+          items:
+            type: object
+            required: [slug, nameEn, hotelCount, packageCount]
+            properties:
+              slug:
+                type: string
+              nameEn:
+                type: string
+              hotelCount:
+                type: integer
+              packageCount:
+                type: integer
+
+    QuoteRequest:
+      type: object
+      required: [packageId, nights, roomType, guestName]
+      properties:
+        packageId:
+          type: integer
+        nights:
+          type: integer
+        roomType:
+          type: string
+        guestName:
+          type: string
+        guestPhone:
+          type: ["string", "null"]
+        adults:
+          type: integer
+        children:
+          type: integer
+        specialRequests:
+          type: ["string", "null"]
+
+    QuoteResponse:
+      type: object
+      required: [quoteId, hotelNameAr, hotelNameEn, destinationNameAr, destinationNameEn, nights, roomType, mealPlan, finalPriceJod, whatsappNumber, whatsappMessage, guestName]
+      properties:
+        quoteId:
+          type: string
+        hotelNameAr:
+          type: string
+        hotelNameEn:
+          type: string
+        destinationNameAr:
+          type: string
+        destinationNameEn:
+          type: string
+        nights:
+          type: integer
+        roomType:
+          type: string
+        mealPlan:
+          type: string
+        finalPriceJod:
+          type: number
+        finalPriceUsd:
+          type: ["number", "null"]
+        whatsappNumber:
+          type: string
+        whatsappMessage:
+          type: string
+        guestName:
+          type: string
+        adults:
+          type: ["integer", "null"]
+        children:
+          type: ["integer", "null"]
+        hotelStars:
+          type: ["integer", "null"]
+        hotelArea:
+          type: ["string", "null"]
+        dateFrom:
+          type: ["string", "null"]
+        dateTo:
+          type: ["string", "null"]
