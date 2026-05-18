@@ -136,7 +136,7 @@ function FeaturedDestinations() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {destinations?.slice(0, 6).map((dest, i) => (
+            {(Array.isArray(destinations) ? destinations : []).slice(0, 6).map((dest, i) => (
               <motion.div
                 key={dest.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -218,7 +218,7 @@ function PopularPackages() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {packages?.slice(0, 3).map((pkg, i) => (
+            {(Array.isArray(packages) ? packages : []).slice(0, 3).map((pkg, i) => (
               <PackageCard
                 key={pkg.id}
                 pkg={pkg}

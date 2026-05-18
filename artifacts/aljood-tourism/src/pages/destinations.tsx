@@ -10,7 +10,8 @@ export default function DestinationsPage() {
   const { data: destinations, isLoading } = useListDestinations();
   const [search, setSearch] = useState("");
 
-  const filtered = destinations?.filter(
+  const destList = Array.isArray(destinations) ? destinations : [];
+  const filtered = destList.filter(
     (d) =>
       d.nameAr.includes(search) ||
       d.nameEn.toLowerCase().includes(search.toLowerCase()) ||
