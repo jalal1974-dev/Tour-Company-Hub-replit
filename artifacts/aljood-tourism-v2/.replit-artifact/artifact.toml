@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Al Jood Travel & Tourism"
+version = "1.0.0"
+id = "artifacts/aljood-tourism-v2"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24973
+
+[services.development]
+run = "pnpm --filter @workspace/aljood-tourism-v2 run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/aljood-tourism-v2", "run", "build" ]
+publicDir = "artifacts/aljood-tourism-v2/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24973"
+BASE_PATH = "/"
