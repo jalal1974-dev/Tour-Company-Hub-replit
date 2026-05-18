@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import { Upload, Download, CheckCircle, AlertCircle, FileText, X, ChevronDown, ChevronUp } from "lucide-react";
+import { Upload, Download, CheckCircle, AlertCircle, FileText, X, ChevronDown, ChevronUp, DatabaseBackup, MapPin, Building2, Package } from "lucide-react";
 import { AdminLayout } from "@/components/AdminLayout";
 import { AdminGuard } from "@/components/AdminGuard";
 import { useToast } from "@/hooks/use-toast";
@@ -217,6 +217,20 @@ function PreviewTable({ title, rows, headers }: PreviewTableProps) {
   );
 }
 
+type ExportData = {
+  destinations: Record<string, unknown>[];
+  hotels: Record<string, unknown>[];
+  packages: Record<string, unknown>[];
+};
+
+function rowsToCSV(headers: string[], rows: Record<string, unknown>[]): string {
+  const escape = (v: unknown) => {
+    const s = String(v ?? "");
+    return s.includes(",") || s.includes('"') || s.includes("\n") ? `"${s.replace(/"/g, '""')}"` : s;
+  };
+  return [headers.join(","), ...rows.map(r => headers.map(h => escape(r[h])).join(","))].join("\n");
+}
+
 export default function AdminImportPage() {
   const { toast } = useToast();
   const [destRows, setDestRows] = useState<DestRow[]>([]);
@@ -224,8 +238,54 @@ export default function AdminImportPage() {
   const [pkgRows, setPkgRows] = useState<PackageRow[]>([]);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<ImportResult | null>(null);
+  const [exportLoading, setExportLoading] = useState(false);
+  const [exportData, setExportData] = useState<ExportData | null>(null);
 
   const totalRows = destRows.length + hotelRows.length + pkgRows.length;
+
+  const fetchExportData = async (): Promise<ExportData | null> => {
+    if (exportData) return exportData;
+    setExportLoading(true);
+    try {
+      const res = await fetch("/api/admin/export", { credentials: "include" });
+      if (!res.ok) throw new Error(`Server error: ${res.status}`);
+      const data: ExportData = await res.json();
+      setExportData(data);
+      return data;
+    } catch (err) {
+      toast({ title: "فشل التصدير", description: (err as Error).message, variant: "destructive" });
+      return null;
+    } finally {
+      setExportLoading(false);
+    }
+  };
+
+  const handleExportSingle = async (type: "destinations" | "hotels" | "packages") => {
+    const data = await fetchExportData();
+    if (!data) return;
+    const headersMap = {
+      destinations: ["slug","nameAr","nameEn","country","flag","heroImage","descriptionAr","descriptionEn","isFeatured","isActive","sortOrder"],
+      hotels: ["destinationSlug","nameAr","nameEn","stars","area","description","imageUrl","isActive"],
+      packages: ["destinationSlug","hotelNameEn","nights","mealPlan","roomType","basePriceUsd","dateFrom","dateTo","isActive"],
+    };
+    const labelMap = { destinations: "destinations", hotels: "hotels", packages: "packages" };
+    const csv = rowsToCSV(headersMap[type], data[type] as Record<string, unknown>[]);
+    downloadCSV(`aljood-${labelMap[type]}-${new Date().toISOString().slice(0,10)}.csv`, csv);
+    toast({ title: `تم تصدير ${data[type].length} سجل` });
+  };
+
+  const handleExportAll = async () => {
+    const data = await fetchExportData();
+    if (!data) return;
+    const destCSV = rowsToCSV(["slug","nameAr","nameEn","country","flag","heroImage","descriptionAr","descriptionEn","isFeatured","isActive","sortOrder"], data.destinations as Record<string, unknown>[]);
+    const hotelsCSV = rowsToCSV(["destinationSlug","nameAr","nameEn","stars","area","description","imageUrl","isActive"], data.hotels as Record<string, unknown>[]);
+    const pkgsCSV = rowsToCSV(["destinationSlug","hotelNameEn","nights","mealPlan","roomType","basePriceUsd","dateFrom","dateTo","isActive"], data.packages as Record<string, unknown>[]);
+    const date = new Date().toISOString().slice(0, 10);
+    downloadCSV(`aljood-destinations-${date}.csv`, destCSV);
+    setTimeout(() => downloadCSV(`aljood-hotels-${date}.csv`, hotelsCSV), 300);
+    setTimeout(() => downloadCSV(`aljood-packages-${date}.csv`, pkgsCSV), 600);
+    toast({ title: "تم التصدير", description: `${data.destinations.length} وجهات، ${data.hotels.length} فنادق، ${data.packages.length} باقات` });
+  };
 
   const handleImport = async () => {
     if (totalRows === 0) return;
@@ -277,8 +337,67 @@ export default function AdminImportPage() {
 
   return (
     <AdminGuard>
-      <AdminLayout title="الاستيراد السريع" titleEn="Quick Import">
-        <div className="max-w-4xl space-y-6">
+      <AdminLayout title="الاستيراد والتصدير" titleEn="Import & Export">
+        <div className="max-w-4xl space-y-8">
+
+          {/* ── Export Section ── */}
+          <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+            className="border border-white/10 rounded-lg overflow-hidden">
+            <div className="px-4 py-3 bg-card border-b border-white/10 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <DatabaseBackup className="w-4 h-4 text-primary" />
+                <span className="text-sm font-medium text-foreground">تصدير البيانات</span>
+                <span className="text-xs text-foreground/30">/ Export Data</span>
+              </div>
+              <button
+                onClick={handleExportAll}
+                disabled={exportLoading}
+                className="flex items-center gap-1.5 text-xs bg-primary/10 text-primary hover:bg-primary/20 px-3 py-1.5 rounded transition-colors disabled:opacity-50"
+              >
+                {exportLoading
+                  ? <span className="w-3.5 h-3.5 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
+                  : <Download className="w-3.5 h-3.5" />}
+                تصدير الكل / Export All
+              </button>
+            </div>
+            <div className="p-4 grid grid-cols-3 gap-3">
+              {[
+                { type: "destinations" as const, label: "الوجهات", labelEn: "Destinations", icon: MapPin },
+                { type: "hotels" as const, label: "الفنادق", labelEn: "Hotels", icon: Building2 },
+                { type: "packages" as const, label: "الباقات", labelEn: "Packages", icon: Package },
+              ].map(({ type, label, labelEn, icon: Icon }) => (
+                <button
+                  key={type}
+                  onClick={() => handleExportSingle(type)}
+                  disabled={exportLoading}
+                  className="flex flex-col items-center gap-2 p-4 border border-white/10 rounded-lg hover:border-primary/30 hover:bg-primary/5 transition-colors disabled:opacity-50 group"
+                >
+                  <Icon className="w-5 h-5 text-foreground/40 group-hover:text-primary transition-colors" />
+                  <div className="text-center">
+                    <p className="text-xs font-medium text-foreground">{label}</p>
+                    <p className="text-[10px] text-foreground/30">{labelEn}</p>
+                  </div>
+                  <Download className="w-3.5 h-3.5 text-foreground/20 group-hover:text-primary transition-colors" />
+                </button>
+              ))}
+            </div>
+            <div className="px-4 py-2 bg-muted/10 border-t border-white/10">
+              <p className="text-[10px] text-foreground/30">
+                يمكنك تحرير الملفات المُصدَّرة في Excel ثم إعادة استيرادها لتحديث بياناتك.
+                Exported files can be edited in Excel and re-imported to update your data.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* ── Divider ── */}
+          <div className="flex items-center gap-3">
+            <div className="flex-1 border-t border-white/10" />
+            <span className="text-xs text-foreground/30 flex items-center gap-1.5">
+              <Upload className="w-3 h-3" /> استيراد البيانات / Import Data
+            </span>
+            <div className="flex-1 border-t border-white/10" />
+          </div>
+
           <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="space-y-1">
             <p className="text-sm text-foreground/60">
               استورد وجهات وفنادق وباقات دفعة واحدة من ملفات CSV. قم بتنزيل القالب، أضف بياناتك، ثم ارفع الملف.

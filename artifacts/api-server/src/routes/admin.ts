@@ -454,6 +454,55 @@ router.patch("/admin/packages/:id/toggle", requireAdmin, async (req, res): Promi
   });
 });
 
+router.get("/admin/export", requireAdmin, async (_req, res): Promise<void> => {
+  const destinations = await db.select().from(destinationsTable).orderBy(destinationsTable.sortOrder);
+  const hotels = await db.select().from(hotelsTable);
+  const packages = await db.select().from(packagesTable);
+
+  const destSlugMap = new Map<number, string>();
+  for (const d of destinations) destSlugMap.set(d.id, d.slug);
+
+  const hotelNameMap = new Map<number, string>();
+  for (const h of hotels) hotelNameMap.set(h.id, h.nameEn);
+
+  res.json({
+    destinations: destinations.map(d => ({
+      slug: d.slug,
+      nameAr: d.nameAr,
+      nameEn: d.nameEn,
+      country: d.country,
+      flag: d.flag ?? "",
+      heroImage: d.heroImage ?? "",
+      descriptionAr: d.descriptionAr ?? "",
+      descriptionEn: d.descriptionEn ?? "",
+      isFeatured: d.isFeatured,
+      isActive: d.isActive,
+      sortOrder: d.sortOrder,
+    })),
+    hotels: hotels.map(h => ({
+      destinationSlug: destSlugMap.get(h.destinationId) ?? "",
+      nameAr: h.nameAr,
+      nameEn: h.nameEn,
+      stars: h.stars,
+      area: h.area ?? "",
+      description: h.description ?? "",
+      imageUrl: h.imageUrl ?? "",
+      isActive: h.isActive,
+    })),
+    packages: packages.map(p => ({
+      destinationSlug: destSlugMap.get(p.destinationId) ?? "",
+      hotelNameEn: hotelNameMap.get(p.hotelId) ?? "",
+      nights: p.nights,
+      mealPlan: p.mealPlan,
+      roomType: p.roomType,
+      basePriceUsd: parseFloat(p.basePriceUsd as unknown as string),
+      dateFrom: p.dateFrom ?? "",
+      dateTo: p.dateTo ?? "",
+      isActive: p.isActive,
+    })),
+  });
+});
+
 router.post("/admin/import", requireAdmin, async (req, res): Promise<void> => {
   const body = req.body as {
     destinations?: {
