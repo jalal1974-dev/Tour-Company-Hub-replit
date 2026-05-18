@@ -27,3 +27,5 @@ export * from './pricingSettings';
 export * from './pricingSettingsInput';
 export * from './quoteRequest';
 export * from './quoteResponse';
+export * from './uploadUrlRequest';
+export * from './uploadUrlResponse';
