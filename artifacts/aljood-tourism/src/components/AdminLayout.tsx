@@ -1,7 +1,7 @@
 import { Link, useLocation } from "wouter";
 import { useGetAdminMe, useAdminLogout, getGetAdminMeQueryKey } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
-import { LayoutDashboard, MapPin, Building2, Package, Settings, LogOut, Menu, X, Inbox } from "lucide-react";
+import { LayoutDashboard, MapPin, Building2, Package, Settings, LogOut, Menu, X, Inbox, Upload } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -11,6 +11,7 @@ const navItems = [
   { href: "/admin/hotels", label: "الفنادق", labelEn: "Hotels", icon: Building2 },
   { href: "/admin/packages", label: "الباقات", labelEn: "Packages", icon: Package },
   { href: "/admin/inquiries", label: "طلبات التواصل", labelEn: "Inquiries", icon: Inbox },
+  { href: "/admin/import", label: "استيراد CSV", labelEn: "Quick Import", icon: Upload },
   { href: "/admin/settings", label: "الإعدادات", labelEn: "Settings", icon: Settings },
 ];
 

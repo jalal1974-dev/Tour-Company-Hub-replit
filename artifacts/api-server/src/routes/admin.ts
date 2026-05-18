@@ -454,4 +454,145 @@ router.patch("/admin/packages/:id/toggle", requireAdmin, async (req, res): Promi
   });
 });
 
+router.post("/admin/import", requireAdmin, async (req, res): Promise<void> => {
+  const body = req.body as {
+    destinations?: {
+      slug: string; nameAr: string; nameEn: string; country: string;
+      flag?: string; heroImage?: string; descriptionAr?: string; descriptionEn?: string;
+      isFeatured?: boolean;
+    }[];
+    hotels?: {
+      destinationSlug: string; nameAr: string; nameEn: string; stars?: number;
+      area?: string; description?: string; imageUrl?: string;
+    }[];
+    packages?: {
+      destinationSlug: string; hotelNameEn: string; nights: number; mealPlan: string;
+      roomType: string; basePriceUsd: number; dateFrom?: string; dateTo?: string;
+    }[];
+  };
+
+  const results = { destinations: 0, hotels: 0, packages: 0, errors: [] as string[] };
+
+  const slugToDestId = new Map<string, number>();
+  const hotelKeyToId = new Map<string, number>();
+
+  if (body.destinations && body.destinations.length > 0) {
+    for (const d of body.destinations) {
+      try {
+        const [inserted] = await db
+          .insert(destinationsTable)
+          .values({
+            slug: d.slug.trim(),
+            nameAr: d.nameAr.trim(),
+            nameEn: d.nameEn.trim(),
+            country: d.country.trim(),
+            flag: d.flag?.trim() || null,
+            heroImage: d.heroImage?.trim() || "",
+            descriptionAr: d.descriptionAr?.trim() || null,
+            descriptionEn: d.descriptionEn?.trim() || null,
+            isFeatured: d.isFeatured ?? false,
+            isActive: true,
+          })
+          .onConflictDoUpdate({
+            target: destinationsTable.slug,
+            set: {
+              nameAr: d.nameAr.trim(),
+              nameEn: d.nameEn.trim(),
+              country: d.country.trim(),
+              flag: d.flag?.trim() || null,
+              heroImage: d.heroImage?.trim() || "",
+              descriptionAr: d.descriptionAr?.trim() || null,
+              descriptionEn: d.descriptionEn?.trim() || null,
+              isFeatured: d.isFeatured ?? false,
+            },
+          })
+          .returning({ id: destinationsTable.id, slug: destinationsTable.slug });
+        if (inserted) {
+          slugToDestId.set(inserted.slug, inserted.id);
+          results.destinations++;
+        }
+      } catch (err) {
+        results.errors.push(`Destination "${d.nameEn}": ${(err as Error).message}`);
+      }
+    }
+  }
+
+  const existingDests = await db.select({ id: destinationsTable.id, slug: destinationsTable.slug }).from(destinationsTable);
+  for (const d of existingDests) slugToDestId.set(d.slug, d.id);
+
+  if (body.hotels && body.hotels.length > 0) {
+    for (const h of body.hotels) {
+      const destId = slugToDestId.get(h.destinationSlug.trim());
+      if (!destId) {
+        results.errors.push(`Hotel "${h.nameEn}": destination slug "${h.destinationSlug}" not found`);
+        continue;
+      }
+      try {
+        const [inserted] = await db
+          .insert(hotelsTable)
+          .values({
+            destinationId: destId,
+            nameAr: h.nameAr.trim(),
+            nameEn: h.nameEn.trim(),
+            stars: h.stars ?? 4,
+            area: h.area?.trim() || null,
+            description: h.description?.trim() || null,
+            imageUrl: h.imageUrl?.trim() || null,
+            isActive: true,
+          })
+          .returning({ id: hotelsTable.id, nameEn: hotelsTable.nameEn });
+        if (inserted) {
+          hotelKeyToId.set(`${h.destinationSlug}::${inserted.nameEn.toLowerCase()}`, inserted.id);
+          results.hotels++;
+        }
+      } catch (err) {
+        results.errors.push(`Hotel "${h.nameEn}": ${(err as Error).message}`);
+      }
+    }
+  }
+
+  const existingHotels = await db.select({ id: hotelsTable.id, nameEn: hotelsTable.nameEn, destinationId: hotelsTable.destinationId }).from(hotelsTable);
+  const destIdToSlug = new Map<number, string>();
+  for (const [slug, id] of slugToDestId) destIdToSlug.set(id, slug);
+  for (const h of existingHotels) {
+    const slug = destIdToSlug.get(h.destinationId);
+    if (slug) hotelKeyToId.set(`${slug}::${h.nameEn.toLowerCase()}`, h.id);
+  }
+
+  if (body.packages && body.packages.length > 0) {
+    for (const p of body.packages) {
+      const destId = slugToDestId.get(p.destinationSlug.trim());
+      if (!destId) {
+        results.errors.push(`Package (${p.hotelNameEn}): destination slug "${p.destinationSlug}" not found`);
+        continue;
+      }
+      const hotelKey = `${p.destinationSlug}::${p.hotelNameEn.trim().toLowerCase()}`;
+      const hotelId = hotelKeyToId.get(hotelKey);
+      if (!hotelId) {
+        results.errors.push(`Package: hotel "${p.hotelNameEn}" not found in destination "${p.destinationSlug}"`);
+        continue;
+      }
+      try {
+        await db.insert(packagesTable).values({
+          destinationId: destId,
+          hotelId,
+          nights: p.nights,
+          mealPlan: p.mealPlan.trim(),
+          roomType: p.roomType.trim(),
+          basePriceUsd: String(p.basePriceUsd),
+          currency: "USD",
+          dateFrom: p.dateFrom?.trim() || null,
+          dateTo: p.dateTo?.trim() || null,
+          isActive: true,
+        });
+        results.packages++;
+      } catch (err) {
+        results.errors.push(`Package (${p.hotelNameEn}, ${p.nights}n): ${(err as Error).message}`);
+      }
+    }
+  }
+
+  res.json(results);
+});
+
 export default router;

@@ -15,6 +15,7 @@ import AdminDestinationsPage from "@/pages/admin/destinations";
 import AdminHotelsPage from "@/pages/admin/hotels";
 import AdminPackagesPage from "@/pages/admin/packages";
 import AdminInquiriesPage from "@/pages/admin/inquiries";
+import AdminImportPage from "@/pages/admin/import";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -39,6 +40,7 @@ function Router() {
       <Route path="/admin/packages" component={AdminPackagesPage} />
       <Route path="/admin/settings" component={AdminSettingsPage} />
       <Route path="/admin/inquiries" component={AdminInquiriesPage} />
+      <Route path="/admin/import" component={AdminImportPage} />
       <Route component={NotFound} />
     </Switch>
   );
