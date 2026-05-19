@@ -26,6 +26,8 @@ export interface Destination {
   isFeatured: boolean;
   sortOrder: number;
   /** @nullable */
+  ticketPriceJod?: number | null;
+  /** @nullable */
   hotelCount?: number | null;
   /** @nullable */
   minPrice?: number | null;
@@ -46,6 +48,8 @@ export interface DestinationInput {
   isActive?: boolean;
   isFeatured?: boolean;
   sortOrder?: number;
+  /** @nullable */
+  ticketPriceJod?: number | null;
 }
 
 export interface DestinationSummary {

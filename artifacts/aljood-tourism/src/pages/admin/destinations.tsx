@@ -23,11 +23,13 @@ interface DestForm {
   descriptionAr: string;
   descriptionEn: string;
   isFeatured: boolean;
+  ticketPriceJod: string;
 }
 
 const empty: DestForm = {
   slug: "", nameAr: "", nameEn: "", country: "", flag: "",
   heroImage: "", descriptionAr: "", descriptionEn: "", isFeatured: false,
+  ticketPriceJod: "",
 };
 
 export default function AdminDestinationsPage() {
@@ -58,14 +60,32 @@ export default function AdminDestinationsPage() {
       descriptionAr: d.descriptionAr ?? "",
       descriptionEn: d.descriptionEn ?? "",
       isFeatured: d.isFeatured ?? false,
+      ticketPriceJod: d.ticketPriceJod != null ? String(d.ticketPriceJod) : "",
     });
+  };
+
+  const buildPayload = (form: DestForm) => {
+    const ticketVal = form.ticketPriceJod.trim();
+    return {
+      slug: form.slug,
+      nameAr: form.nameAr,
+      nameEn: form.nameEn,
+      country: form.country,
+      flag: form.flag || null,
+      heroImage: form.heroImage,
+      descriptionAr: form.descriptionAr || null,
+      descriptionEn: form.descriptionEn || null,
+      isFeatured: form.isFeatured,
+      ticketPriceJod: ticketVal !== "" ? parseFloat(ticketVal) : null,
+    };
   };
 
   const handleSave = () => {
     if (!editing) return;
+    const data = buildPayload(editing);
     if (editing.id) {
       updateDest.mutate(
-        { id: editing.id!, data: editing },
+        { id: editing.id!, data },
         {
           onSuccess: () => { invalidate(); setEditing(null); toast({ title: "تم التحديث" }); },
           onError: () => toast({ title: "خطأ", variant: "destructive" }),
@@ -73,7 +93,7 @@ export default function AdminDestinationsPage() {
       );
     } else {
       createDest.mutate(
-        { data: editing },
+        { data },
         {
           onSuccess: () => { invalidate(); setEditing(null); toast({ title: "تمت الإضافة" }); },
           onError: () => toast({ title: "خطأ", variant: "destructive" }),
@@ -116,6 +136,7 @@ export default function AdminDestinationsPage() {
                   <th className="text-right p-3 font-medium">الوجهة</th>
                   <th className="text-right p-3 font-medium">السلج</th>
                   <th className="text-right p-3 font-medium">الدولة</th>
+                  <th className="text-right p-3 font-medium">تذكرة (JOD)</th>
                   <th className="text-right p-3 font-medium">مميز</th>
                   <th className="p-3" />
                 </tr>
@@ -141,6 +162,13 @@ export default function AdminDestinationsPage() {
                     </td>
                     <td className="p-3 text-foreground/40 font-mono text-xs">{d.slug}</td>
                     <td className="p-3 text-foreground/60">{d.country}</td>
+                    <td className="p-3 text-foreground/60 font-mono text-xs">
+                      {d.ticketPriceJod != null ? (
+                        <span className="text-primary">{d.ticketPriceJod} JOD</span>
+                      ) : (
+                        <span className="text-foreground/20">—</span>
+                      )}
+                    </td>
                     <td className="p-3">
                       {d.isFeatured ? <span className="text-primary text-xs">✓</span> : <span className="text-foreground/20 text-xs">—</span>}
                     </td>
@@ -189,6 +217,24 @@ export default function AdminDestinationsPage() {
                     />
                   </div>
                 ))}
+
+                {/* Per-destination ticket price */}
+                <div>
+                  <label className="text-xs text-foreground/60 block mb-1">
+                    سعر التذكرة بالدينار (JOD) — اتركه فارغاً لاستخدام الإعداد العام
+                  </label>
+                  <input
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    placeholder="مثال: 0 للوجهات المحلية أو غير المعروضة"
+                    value={editing.ticketPriceJod}
+                    onChange={(e) => setEditing({ ...editing, ticketPriceJod: e.target.value })}
+                    className="w-full bg-muted border border-white/10 focus:border-primary text-foreground text-sm px-3 py-2 outline-none"
+                    data-testid="input-dest-ticketPriceJod"
+                  />
+                </div>
+
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="checkbox"

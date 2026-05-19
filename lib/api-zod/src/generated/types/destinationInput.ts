@@ -21,4 +21,6 @@ export interface DestinationInput {
   isActive?: boolean;
   isFeatured?: boolean;
   sortOrder?: number;
+  /** @nullable */
+  ticketPriceJod?: number | null;
 }

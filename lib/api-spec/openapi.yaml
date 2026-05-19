@@ -608,6 +608,8 @@ components:
           type: boolean
         sortOrder:
           type: integer
+        ticketPriceJod:
+          type: ["number", "null"]
         hotelCount:
           type: ["integer", "null"]
         minPrice:
@@ -639,6 +641,8 @@ components:
           type: boolean
         sortOrder:
           type: integer
+        ticketPriceJod:
+          type: ["number", "null"]
 
     DestinationSummary:
       type: object

@@ -13,6 +13,7 @@ export function computeFinalPrice(
   nights: number,
   currency: string,
   config: PricingConfig,
+  destTicketPriceJod?: number | null,
 ): { jod: number; usd: number } {
   let rate: number;
   switch (currency.toUpperCase()) {
@@ -28,8 +29,9 @@ export function computeFinalPrice(
       break;
   }
 
+  const ticket = destTicketPriceJod != null ? destTicketPriceJod : config.ticketPriceJod;
   const hotelCostJod = basePriceUsd * nights * rate;
-  const subtotal = hotelCostJod + config.ticketPriceJod + config.transportJod + config.fixedProfitJod;
+  const subtotal = hotelCostJod + ticket + config.transportJod + config.fixedProfitJod;
   const finalJod = subtotal * (1 + config.profitPct / 100);
   const finalUsd = finalJod / config.rateUsdToJod;
 

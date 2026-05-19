@@ -37,21 +37,26 @@ router.get("/destinations", async (req, res): Promise<void> => {
 
   const minPriceMap: Record<number, number> = {};
   if (cfg) {
+    const config = {
+      ticketPriceJod: parseFloat(cfg.ticketPriceJod as unknown as string),
+      transportJod: parseFloat(cfg.transportJod as unknown as string),
+      fixedProfitJod: parseFloat(cfg.fixedProfitJod as unknown as string),
+      profitPct: parseFloat(cfg.profitPct as unknown as string),
+      rateUsdToJod: parseFloat(cfg.rateUsdToJod as unknown as string),
+      rateEurToJod: parseFloat(cfg.rateEurToJod as unknown as string),
+      rateSarToJod: parseFloat(cfg.rateSarToJod as unknown as string),
+    };
+    const destTicketMap: Record<number, number | null> = {};
+    for (const d of destinations) {
+      destTicketMap[d.id] = d.ticketPriceJod != null ? parseFloat(d.ticketPriceJod as unknown as string) : null;
+    }
     for (const pkg of pkgs) {
-      const config = {
-        ticketPriceJod: parseFloat(cfg.ticketPriceJod as unknown as string),
-        transportJod: parseFloat(cfg.transportJod as unknown as string),
-        fixedProfitJod: parseFloat(cfg.fixedProfitJod as unknown as string),
-        profitPct: parseFloat(cfg.profitPct as unknown as string),
-        rateUsdToJod: parseFloat(cfg.rateUsdToJod as unknown as string),
-        rateEurToJod: parseFloat(cfg.rateEurToJod as unknown as string),
-        rateSarToJod: parseFloat(cfg.rateSarToJod as unknown as string),
-      };
       const price = computeFinalPrice(
         parseFloat(pkg.basePriceUsd as unknown as string),
         pkg.nights,
         pkg.currency,
         config,
+        destTicketMap[pkg.destinationId],
       );
       const existing = minPriceMap[pkg.destinationId];
       if (existing == null || price.jod < existing) {
@@ -77,7 +82,42 @@ router.get("/destinations/featured", async (_req, res): Promise<void> => {
     .orderBy(asc(destinationsTable.sortOrder))
     .limit(6);
 
-  res.json(destinations.map((d) => ({ ...d, hotelCount: null, minPrice: null })));
+  const settings = await db.select().from(pricingSettingsTable).limit(1);
+  const cfg = settings[0];
+
+  const minPriceMap: Record<number, number> = {};
+  if (cfg && destinations.length > 0) {
+    const config = {
+      ticketPriceJod: parseFloat(cfg.ticketPriceJod as unknown as string),
+      transportJod: parseFloat(cfg.transportJod as unknown as string),
+      fixedProfitJod: parseFloat(cfg.fixedProfitJod as unknown as string),
+      profitPct: parseFloat(cfg.profitPct as unknown as string),
+      rateUsdToJod: parseFloat(cfg.rateUsdToJod as unknown as string),
+      rateEurToJod: parseFloat(cfg.rateEurToJod as unknown as string),
+      rateSarToJod: parseFloat(cfg.rateSarToJod as unknown as string),
+    };
+    const destTicketMap: Record<number, number | null> = {};
+    for (const d of destinations) {
+      destTicketMap[d.id] = d.ticketPriceJod != null ? parseFloat(d.ticketPriceJod as unknown as string) : null;
+    }
+    const pkgs = await db.select().from(packagesTable).where(eq(packagesTable.isActive, true));
+    for (const pkg of pkgs) {
+      if (!destTicketMap.hasOwnProperty(pkg.destinationId)) continue;
+      const price = computeFinalPrice(
+        parseFloat(pkg.basePriceUsd as unknown as string),
+        pkg.nights,
+        pkg.currency,
+        config,
+        destTicketMap[pkg.destinationId],
+      );
+      const existing = minPriceMap[pkg.destinationId];
+      if (existing == null || price.jod < existing) {
+        minPriceMap[pkg.destinationId] = price.jod;
+      }
+    }
+  }
+
+  res.json(destinations.map((d) => ({ ...d, hotelCount: null, minPrice: minPriceMap[d.id] ?? null })));
 });
 
 router.get("/destinations/:slug", async (req, res): Promise<void> => {
@@ -141,12 +181,14 @@ router.get("/destinations/:slug/summary", async (req, res): Promise<void> => {
       rateEurToJod: parseFloat(cfg.rateEurToJod as unknown as string),
       rateSarToJod: parseFloat(cfg.rateSarToJod as unknown as string),
     };
+    const destTicket = destination.ticketPriceJod != null ? parseFloat(destination.ticketPriceJod as unknown as string) : null;
     for (const pkg of pkgs) {
       const price = computeFinalPrice(
         parseFloat(pkg.basePriceUsd as unknown as string),
         pkg.nights,
         pkg.currency,
         config,
+        destTicket,
       );
       if (minPrice == null || price.jod < minPrice) minPrice = price.jod;
       if (maxPrice == null || price.jod > maxPrice) maxPrice = price.jod;
@@ -219,11 +261,13 @@ router.get("/packages", async (req, res): Promise<void> => {
       return true;
     })
     .map((row) => {
+      const destTicket = row.destination.ticketPriceJod != null ? parseFloat(row.destination.ticketPriceJod as unknown as string) : null;
       const price = computeFinalPrice(
         parseFloat(row.pkg.basePriceUsd as unknown as string),
         row.pkg.nights,
         row.pkg.currency,
         config,
+        destTicket,
       );
       return {
         id: row.pkg.id,

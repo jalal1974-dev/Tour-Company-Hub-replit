@@ -60,6 +60,7 @@ export const ListDestinationsResponseItem = zod.object({
   "isActive": zod.boolean(),
   "isFeatured": zod.boolean(),
   "sortOrder": zod.number(),
+  "ticketPriceJod": zod.number().nullish(),
   "hotelCount": zod.number().nullish(),
   "minPrice": zod.number().nullish()
 })
@@ -82,6 +83,7 @@ export const ListFeaturedDestinationsResponseItem = zod.object({
   "isActive": zod.boolean(),
   "isFeatured": zod.boolean(),
   "sortOrder": zod.number(),
+  "ticketPriceJod": zod.number().nullish(),
   "hotelCount": zod.number().nullish(),
   "minPrice": zod.number().nullish()
 })
@@ -108,6 +110,7 @@ export const GetDestinationResponse = zod.object({
   "isActive": zod.boolean(),
   "isFeatured": zod.boolean(),
   "sortOrder": zod.number(),
+  "ticketPriceJod": zod.number().nullish(),
   "hotelCount": zod.number().nullish(),
   "minPrice": zod.number().nullish()
 })
@@ -308,6 +311,7 @@ export const ListAdminDestinationsResponseItem = zod.object({
   "isActive": zod.boolean(),
   "isFeatured": zod.boolean(),
   "sortOrder": zod.number(),
+  "ticketPriceJod": zod.number().nullish(),
   "hotelCount": zod.number().nullish(),
   "minPrice": zod.number().nullish()
 })
@@ -328,7 +332,8 @@ export const CreateAdminDestinationBody = zod.object({
   "flag": zod.string().nullish(),
   "isActive": zod.boolean().optional(),
   "isFeatured": zod.boolean().optional(),
-  "sortOrder": zod.number().optional()
+  "sortOrder": zod.number().optional(),
+  "ticketPriceJod": zod.number().nullish()
 })
 
 
@@ -352,6 +357,7 @@ export const GetAdminDestinationResponse = zod.object({
   "isActive": zod.boolean(),
   "isFeatured": zod.boolean(),
   "sortOrder": zod.number(),
+  "ticketPriceJod": zod.number().nullish(),
   "hotelCount": zod.number().nullish(),
   "minPrice": zod.number().nullish()
 })
@@ -375,7 +381,8 @@ export const UpdateAdminDestinationBody = zod.object({
   "flag": zod.string().nullish(),
   "isActive": zod.boolean().optional(),
   "isFeatured": zod.boolean().optional(),
-  "sortOrder": zod.number().optional()
+  "sortOrder": zod.number().optional(),
+  "ticketPriceJod": zod.number().nullish()
 })
 
 export const UpdateAdminDestinationResponse = zod.object({
@@ -391,6 +398,7 @@ export const UpdateAdminDestinationResponse = zod.object({
   "isActive": zod.boolean(),
   "isFeatured": zod.boolean(),
   "sortOrder": zod.number(),
+  "ticketPriceJod": zod.number().nullish(),
   "hotelCount": zod.number().nullish(),
   "minPrice": zod.number().nullish()
 })

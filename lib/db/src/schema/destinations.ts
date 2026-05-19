@@ -1,4 +1,4 @@
-import { pgTable, text, serial, boolean, integer, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, boolean, integer, timestamp, numeric } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod/v4";
 
@@ -15,6 +15,7 @@ export const destinationsTable = pgTable("destinations", {
   isActive: boolean("is_active").notNull().default(true),
   isFeatured: boolean("is_featured").notNull().default(false),
   sortOrder: integer("sort_order").notNull().default(0),
+  ticketPriceJod: numeric("ticket_price_jod", { precision: 10, scale: 2 }),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow().$onUpdate(() => new Date()),
 });

@@ -205,12 +205,21 @@ router.get("/admin/stats", requireAdmin, async (_req, res): Promise<void> => {
   });
 });
 
+function serializeDest(d: typeof destinationsTable.$inferSelect) {
+  return {
+    ...d,
+    ticketPriceJod: d.ticketPriceJod != null ? parseFloat(d.ticketPriceJod as unknown as string) : null,
+    hotelCount: null,
+    minPrice: null,
+  };
+}
+
 router.get("/admin/destinations", requireAdmin, async (_req, res): Promise<void> => {
   const destinations = await db
     .select()
     .from(destinationsTable)
     .orderBy(destinationsTable.sortOrder);
-  res.json(destinations.map((d) => ({ ...d, hotelCount: null, minPrice: null })));
+  res.json(destinations.map(serializeDest));
 });
 
 router.post("/admin/destinations", requireAdmin, async (req, res): Promise<void> => {
@@ -219,8 +228,12 @@ router.post("/admin/destinations", requireAdmin, async (req, res): Promise<void>
     res.status(400).json({ error: parsed.error.message });
     return;
   }
-  const [created] = await db.insert(destinationsTable).values(parsed.data).returning();
-  res.status(201).json({ ...created, hotelCount: null, minPrice: null });
+  const { ticketPriceJod, ...rest } = parsed.data as typeof parsed.data & { ticketPriceJod?: number | null };
+  const [created] = await db.insert(destinationsTable).values({
+    ...rest,
+    ticketPriceJod: ticketPriceJod != null ? String(ticketPriceJod) : null,
+  }).returning();
+  res.status(201).json(serializeDest(created));
 });
 
 router.get("/admin/destinations/:id", requireAdmin, async (req, res): Promise<void> => {
@@ -234,7 +247,7 @@ router.get("/admin/destinations/:id", requireAdmin, async (req, res): Promise<vo
     res.status(404).json({ error: "Destination not found" });
     return;
   }
-  res.json({ ...dest, hotelCount: null, minPrice: null });
+  res.json(serializeDest(dest));
 });
 
 router.put("/admin/destinations/:id", requireAdmin, async (req, res): Promise<void> => {
@@ -248,16 +261,20 @@ router.put("/admin/destinations/:id", requireAdmin, async (req, res): Promise<vo
     res.status(400).json({ error: parsed.error.message });
     return;
   }
+  const { ticketPriceJod, ...rest } = parsed.data as typeof parsed.data & { ticketPriceJod?: number | null };
   const [updated] = await db
     .update(destinationsTable)
-    .set(parsed.data)
+    .set({
+      ...rest,
+      ticketPriceJod: ticketPriceJod !== undefined ? (ticketPriceJod != null ? String(ticketPriceJod) : null) : undefined,
+    })
     .where(eq(destinationsTable.id, params.data.id))
     .returning();
   if (!updated) {
     res.status(404).json({ error: "Destination not found" });
     return;
   }
-  res.json({ ...updated, hotelCount: null, minPrice: null });
+  res.json(serializeDest(updated));
 });
 
 router.delete("/admin/destinations/:id", requireAdmin, async (req, res): Promise<void> => {
