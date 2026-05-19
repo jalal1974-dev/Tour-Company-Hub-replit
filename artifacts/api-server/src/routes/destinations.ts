@@ -286,6 +286,9 @@ router.get("/packages", async (req, res): Promise<void> => {
         isActive: row.pkg.isActive,
         hotelImageUrl: row.hotel.imageUrl ?? null,
         hotelDescription: row.hotel.description ?? null,
+        destinationSlug: row.destination.slug,
+        destinationNameAr: row.destination.nameAr,
+        destinationNameEn: row.destination.nameEn,
       };
     })
     .filter((p) => {

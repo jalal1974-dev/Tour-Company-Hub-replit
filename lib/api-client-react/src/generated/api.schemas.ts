@@ -161,6 +161,12 @@ export interface PackageResult {
   hotelImageUrl?: string | null;
   /** @nullable */
   hotelDescription?: string | null;
+  /** @nullable */
+  destinationSlug?: string | null;
+  /** @nullable */
+  destinationNameAr?: string | null;
+  /** @nullable */
+  destinationNameEn?: string | null;
 }
 
 export interface PricingSettings {

@@ -146,7 +146,10 @@ export const ListPackagesResponseItem = zod.object({
   "dateTo": zod.string().nullish(),
   "isActive": zod.boolean(),
   "hotelImageUrl": zod.string().nullish(),
-  "hotelDescription": zod.string().nullish()
+  "hotelDescription": zod.string().nullish(),
+  "destinationSlug": zod.string().nullish(),
+  "destinationNameAr": zod.string().nullish(),
+  "destinationNameEn": zod.string().nullish()
 })
 export const ListPackagesResponse = zod.array(ListPackagesResponseItem)
 

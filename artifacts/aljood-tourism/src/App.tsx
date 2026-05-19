@@ -8,6 +8,7 @@ import HomePage from "@/pages/home";
 import DestinationsPage from "@/pages/destinations";
 import DestinationDetailPage from "@/pages/destination-detail";
 import ContactPage from "@/pages/contact";
+import PackagesPage from "@/pages/packages";
 import AdminLoginPage from "@/pages/admin/login";
 import AdminDashboardPage from "@/pages/admin/dashboard";
 import AdminSettingsPage from "@/pages/admin/settings";
@@ -33,6 +34,7 @@ function Router() {
       <Route path="/destinations" component={DestinationsPage} />
       <Route path="/destinations/:slug" component={DestinationDetailPage} />
       <Route path="/contact" component={ContactPage} />
+      <Route path="/packages" component={PackagesPage} />
       <Route path="/admin/login" component={AdminLoginPage} />
       <Route path="/admin" component={AdminDashboardPage} />
       <Route path="/admin/destinations" component={AdminDestinationsPage} />

@@ -822,6 +822,12 @@ components:
           type: ["string", "null"]
         hotelDescription:
           type: ["string", "null"]
+        destinationSlug:
+          type: ["string", "null"]
+        destinationNameAr:
+          type: ["string", "null"]
+        destinationNameEn:
+          type: ["string", "null"]
 
     PricingSettings:
       type: object
